@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Box for Magisk</string>
+    <string name="app_version">1.0.0</string>
+    <!-- BaseActivity -->
+    <string name="min_module_version">20230116</string>
+    <string name="need_install_module">Please install the BoxForMagisk module first!</string>
+    <string name="need_update_module">Please update your BoxForMagisk module to at least %s !</string>
+    <string name="module_repo_url">https://github.com/taamarin/box_for_magisk</string>
+    <string name="release_repo_url">https://github.com/taamarin/box_for_magisk/releases</string>
+    <string name="wait">Please wait…</string>
+
+    <!-- Config Editor -->
+    <string name="config_title">Config Editor</string>
+    <string name="config_summary">Edit your config here</string>
+
+    <!-- App list -->
+    <string name="menu_show_games">Show games</string>
+    <string name="menu_show_system_apps">Show system apps</string>
+    <string name="menu_sort">Sort by…</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="sort_by_name_reverse">Sort by name(reverse)</string>
+    <string name="sort_by_package_name">Sort by package name</string>
+    <string name="sort_by_package_name_reverse">Sort by package name(reverse)</string>
+    <string name="sort_by_install_time">Sort by install time</string>
+    <string name="sort_by_install_time_reverse">Sort by install time(reverse)</string>
+    <string name="sort_by_update_time">Sort by update time</string>
+    <string name="sort_by_update_time_reverse">Sort by update time(reverse)</string>
+    <string name="only_work">Notes: for Clash only works on redir-host</string>
+
+    <!-- Main Activity -->
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="install_required">Module install is required</string>
+    <string name="Apps">Apps</string>
+    <string name="sett">Settings</string>
+    <string name="settsum">Customize your setting</string>
+    <string name="dash">Dashboard</string>
+    <string name="dashsum">Check your configuration</string>
+    <string name="Logs">Logs</string>
+    <string name="Settings">Settings</string>
+    <string name="About">About</string>
+    <string name="app_count_in_list">Added %d Apps in %s</string>
+    <string name="whitelist">Whitelist</string>
+    <string name="blacklist">Blacklist</string>
+    <string name="update">Update Available!</string>
+    <string name="updatesum">New update module avalaible : v%s</string>
+
+    <!-- AppList Activity -->
+    <string name="enable_whitelist">Whitelist Mode</string>
+    <string name="applist_title">App List</string>
+    <string name="applist_subtitle">Select app to bypass/proxy</string>
+    <string name="app_description">%s\nVersion: %s</string>
+    <string name="applist_app_store">View in App Store</string>
+    <string name="applist_app_info">App info</string>
+    <string name="failed_to_save_proxy_list">Failed to save proxy app list</string>
+    <string name="failed_to_renew_tproxy_rules">Failed to renew tproxy rules</string>
+    <string name="succeeded_to_renew_tproxy_rules">Succeeded to renew tproxy rules</string>
+
+</resources>

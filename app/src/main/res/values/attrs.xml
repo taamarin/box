@@ -1,0 +1,32 @@
+<resources>
+    <attr
+            name="colorNormal"
+            format="color" />
+    <attr
+            name="colorInstall"
+            format="color" />
+    <attr
+            name="colorAccent"
+            format="color" />
+    <attr
+            name="colorInactive"
+            format="color" />
+    <attr
+            name="colorWarning"
+            format="color" />
+    <attr
+            name="colorAlert"
+            format="color" />
+    <attr
+            name="colorSafe"
+            format="color" />
+    <attr
+            name="colorSecondaryVariant"
+            format="color" />
+    <attr
+            name="colorControlActivated"
+            format="color" />
+    <attr
+            name="colorSurface"
+            format="color" />
+</resources>

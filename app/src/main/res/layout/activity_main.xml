@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:consumeSystemWindowsInsets="start|end"
+    app:fitSystemWindowsInsets="start|end"
+    app:edgeToEdge="true"
+    android:id="@+id/snackbar">
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:fitSystemWindowsInsets="top|bottom"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        tools:ignore="MissingPrefix">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            tools:context=".ui.activity.MainActivity">
+
+            <RelativeLayout
+                android:layout_height="72dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="16dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_marginStart="16dp">
+
+                <ImageView
+                    android:layout_height="42dp"
+                    android:layout_width="42dp"
+                    android:contentDescription="@string/app_name"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/app_icon" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_toEndOf="@id/app_icon"
+                    android:contentDescription="@string/app_name"
+                    android:layout_centerVertical="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textSize="20sp"
+                    android:layout_marginStart="10dp"
+                    tools:ignore="RelativeOverlap"
+                    android:text="@string/app_name" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="86dp"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_marginHorizontal="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#4CAF50"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="8dp"
+                android:focusable="true"
+                android:id="@+id/proxy"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardPreventCornerOverlap="false">
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="18dp"
+                    android:paddingTop="20dp">
+
+                    <ImageView
+                        android:layout_height="28dp"
+                        android:layout_width="28dp"
+                        android:layout_centerVertical="true"
+                        app:tint="?android:attr/textColorPrimaryInverse"
+                        app:srcCompat="@drawable/ic_check_circle"
+                        android:id="@+id/status_icon" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_toEndOf="@id/status_icon"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="?android:attr/textColorPrimaryInverse"
+                        android:layout_marginStart="25dp"
+                        android:id="@+id/status_title" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/status_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="?android:attr/textColorPrimaryInverse"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignStart="@id/status_title"
+                        android:id="@+id/status_summary" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:outlineSpotShadowColor="#3A000000"
+                app:cardElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginHorizontal="16dp"
+                android:outlineAmbientShadowColor="#3A000000"
+                app:cardCornerRadius="8dp"
+                android:id="@+id/apps">
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="18dp"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:layout_height="28dp"
+                        android:layout_width="28dp"
+                        android:contentDescription="@string/Apps"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_apps"
+                        android:id="@+id/apps_icon" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_toEndOf="@id/apps_icon"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginStart="25dp"
+                        android:id="@+id/apps_title"
+                        android:text="@string/Apps" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/apps_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignStart="@id/apps_title"
+                        android:id="@+id/apps_summary" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:outlineSpotShadowColor="#3A000000"
+                app:cardElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:visibility="visible"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginHorizontal="16dp"
+                android:outlineAmbientShadowColor="#3A000000"
+                app:cardCornerRadius="8dp"
+                android:id="@+id/dashboard">
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="18dp"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:layout_height="28dp"
+                        android:layout_width="28dp"
+                        android:contentDescription="@string/dash"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_info_48"
+                        android:id="@+id/dash_icon" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_toEndOf="@id/dash_icon"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginStart="25dp"
+                        android:id="@+id/dash_title"
+                        android:text="@string/dash" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/dash_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignStart="@id/dash_title"
+                        android:text="@string/dashsum"
+                        android:id="@+id/dash_summary" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:outlineSpotShadowColor="#3A000000"
+                app:cardElevation="4dp"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginHorizontal="16dp"
+                android:outlineAmbientShadowColor="#3A000000"
+                app:cardCornerRadius="8dp"
+                android:id="@+id/settings">
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="16dp"
+                    android:paddingStart="18dp"
+                    android:paddingTop="16dp">
+
+                    <ImageView
+                        android:layout_height="28dp"
+                        android:layout_width="28dp"
+                        android:contentDescription="@string/sett"
+                        android:layout_centerVertical="true"
+                        app:srcCompat="@drawable/ic_sett"
+                        android:id="@+id/sett_icon" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_toEndOf="@id/sett_icon"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginStart="25dp"
+                        android:id="@+id/sett_title"
+                        android:text="@string/sett" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_below="@id/sett_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignStart="@id/sett_title"
+                        android:text="@string/settsum"
+                        android:id="@+id/sett_summary" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical"
+                android:id="@+id/lllog">
+
+                <ScrollView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:scrollbars="none"
+                    android:paddingEnd="10dp"
+                    android:fillViewport="true"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/svLOG">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:cardElevation="0dp"
+                        app:cardUseCompatPadding="false"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp"
+                        app:cardPreventCornerOverlap="true">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:padding="10dp"
+                            android:textSize="12sp"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/logStatus"
+                            android:textStyle="bold" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

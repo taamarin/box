@@ -1,0 +1,12 @@
+-keep class com.fasterxml.jackson.databind.**
+-keep class xyz.chz.bfm.ui.activity.base.MyEdittext
+-keep class org.yaml.snakeyaml.**
+-dontwarn java.beans.BeanInfo
+-dontwarn java.beans.ConstructorProperties
+-dontwarn java.beans.FeatureDescriptor
+-dontwarn java.beans.IntrospectionException
+-dontwarn java.beans.Introspector
+-dontwarn java.beans.PropertyDescriptor
+-dontwarn java.beans.Transient
+-dontwarn org.jetbrains.annotations.NotNull
+-dontwarn org.jetbrains.annotations.Nullable

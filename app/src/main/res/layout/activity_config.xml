@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/snackbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:consumeSystemWindowsInsets="start|end"
+    app:edgeToEdge="true"
+    app:fitSystemWindowsInsets="start|end">
+
+    <rikka.material.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        style="?appBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:subtitleTextAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle"
+            app:titleTextAppearance="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            app:popupTheme="?actionBarPopupTheme" />
+
+    </rikka.material.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <xyz.chz.bfm.ui.activity.base.MyEdittext
+                android:id="@+id/conf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="left|top"
+                android:focusableInTouchMode="true"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:text=""
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.widget.RelativeLayout>

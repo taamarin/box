@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
+
+    <LinearLayout
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:padding="20dp"
+         android:orientation="vertical"
+         android:layout_marginTop="10dp"
+         android:layout_weight="1">
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="VPN" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: vmess,vless,trojan,ssr"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:layout_weight="4"
+                 android:id="@+id/vpnbKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="Country Code" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: SG,ID,AS"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:layout_weight="4"
+                 android:id="@+id/countryKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="Network" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: ws,grpc,tcp"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:layout_weight="4"
+                 android:id="@+id/networkKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="SNI" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: m.facebook.com"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:layout_weight="4"
+                 android:id="@+id/sniKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="CdnHost" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: 104.66.77.22"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:layout_weight="4"
+                 android:id="@+id/cdnKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="Limit" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <EditText
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:hint="ex: 5"
+                 android:textSize="12sp"
+                 android:singleLine="true"
+                 android:inputType="number"
+                 android:layout_weight="4"
+                 android:id="@+id/limitKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="0.7"
+                android:text="Mode" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="0.1"
+                android:text=":" />
+
+            <Spinner
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="4"
+                android:id="@+id/modeKey">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="Format" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <Spinner
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="4"
+                 android:id="@+id/formatKey">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.7"
+                 android:text="TLS ?" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:textSize="12sp"
+                 android:layout_weight="0.1"
+                 android:text=":" />
+
+            <CheckBox
+                 android:layout_height="wrap_content"
+                 android:layout_width="0dp"
+                 android:layout_weight="4"
+                 android:id="@+id/tlsKey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_weight="0">
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:text="Generate"
+                 android:id="@+id/generate" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
