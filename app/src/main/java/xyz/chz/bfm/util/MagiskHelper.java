@@ -10,17 +10,17 @@ public final class MagiskHelper {
     private static final String TAG = "BoxForMagisk.MagiskHelper";
     public static final boolean IS_MAGISK_LITE =
             "lite".equals(MagiskHelper.execRootCmd("magisk -v | grep -o lite"));
-
+    
     public static String execRootCmd(String cmd) {
         StringBuilder result = new StringBuilder();
         DataOutputStream dos = null;
         DataInputStream dis = null;
-
+        
         try {
             Process p = Runtime.getRuntime().exec("su");
             dos = new DataOutputStream(p.getOutputStream());
             dis = new DataInputStream(p.getInputStream());
-
+            
             Log.i(TAG, cmd);
             dos.writeBytes(cmd + "\n");
             dos.flush();
@@ -52,15 +52,15 @@ public final class MagiskHelper {
         }
         return result.toString().trim();
     }
-
+    
     public static int execRootCmdSilent(String cmd) {
         int result = -1;
         DataOutputStream dos = null;
-
+        
         try {
             Process p = Runtime.getRuntime().exec("su");
             dos = new DataOutputStream(p.getOutputStream());
-
+            
             Log.i(TAG, cmd);
             dos.writeBytes(cmd + "\n");
             dos.flush();
@@ -81,14 +81,20 @@ public final class MagiskHelper {
         }
         return result;
     }
-
-    public static void execRootCmdVoid(String cmd) {
+    
+    public static void execRootCmdVoid(String cmd, Callback callback) {
         try {
             Process p = Runtime.getRuntime().exec("su -c " + cmd);
             Log.i(TAG, cmd);
             p.waitFor();
+            callback.onResult(p.exitValue() == 0);
         } catch (Exception e) {
             e.printStackTrace();
+            callback.onResult(false);
         }
+    }
+    
+    public interface Callback {
+        void onResult(boolean isSucceed);
     }
 }

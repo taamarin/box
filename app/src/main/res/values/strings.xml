@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Box for Magisk</string>
+    <string name="app_name">Box for Root</string>
     <string name="app_version">1.0.0</string>
     <!-- BaseActivity -->
     <string name="min_module_version">20230116</string>
@@ -30,6 +30,8 @@
     <!-- Main Activity -->
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
+    <string name="loading">Loading</string>
+    <string name="error">Error</string>
     <string name="install_required">Module install is required</string>
     <string name="Apps">Apps</string>
     <string name="sett">Settings</string>

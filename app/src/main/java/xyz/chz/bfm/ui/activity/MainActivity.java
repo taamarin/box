@@ -24,9 +24,13 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
+
 import java.io.UnsupportedEncodingException;
+
 import xyz.chz.bfm.R;
 import xyz.chz.bfm.databinding.ActivityMainBinding;
 import xyz.chz.bfm.ui.activity.ConfigActivity;
@@ -44,11 +48,11 @@ import rikka.core.res.ResourcesKt;
 
 public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
-
+    
     private SharedPreferences sp;
     private Thread t;
     private String bb;
-
+    
     private String mm = "";
     private String format = "";
     private String mode = "";
@@ -59,24 +63,46 @@ public class MainActivity extends BaseActivity {
     private String sni = "";
     private String cdn = "";
     private String limit = "";
-
+    
     @Override
     public void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         sp = getSharedPreferences("CHZPrefCustom", 0);
         binding.proxy.setOnClickListener(
                 v -> {
+                    setProxyCard("loading");
+                    v.setClickable(false);
                     if (BaseActivity.isProxying) {
-                        ProxyUtil.stop();
-                        setProxyCard("disabled");
-                        BaseActivity.isProxying = false;
+                        ProxyUtil.stop(isSucceed -> {
+                            runOnUiThread(
+                                    () -> {
+                                        if (isSucceed) {
+                                            setProxyCard("disabled");
+                                            BaseActivity.isProxying = false;
+                                        } else {
+                                            setProxyCard("error");
+                                            BaseActivity.isProxying = true;
+                                        }
+                                        v.setClickable(true);
+                                    });
+                        });
                     } else {
-                        ProxyUtil.start();
-                        setProxyCard("enabled");
-                        BaseActivity.isProxying = true;
+                        ProxyUtil.start(isSucceed -> {
+                            runOnUiThread(
+                                    () -> {
+                                        if (isSucceed) {
+                                            setProxyCard("enabled");
+                                            BaseActivity.isProxying = true;
+                                        } else {
+                                            setProxyCard("error");
+                                            BaseActivity.isProxying = false;
+                                        }
+                                        v.setClickable(true);
+                                    });
+                        });
                     }
                 });
         binding.settings.setOnClickListener(
@@ -87,7 +113,7 @@ public class MainActivity extends BaseActivity {
         binding.dashboard.setOnClickListener(new StartActivityListener(DashboardActivity.class));
         t =
                 new Thread() {
-
+                    
                     @Override
                     public void run() {
                         try {
@@ -133,7 +159,7 @@ public class MainActivity extends BaseActivity {
         if (sp.getBoolean("cbLog", false)) {
             t.start();
         }
-
+        
         Glide.with(binding.appIcon)
                 .load(GlideHelper.wrapApplicationInfoForIconLoader(getApplicationInfo()))
                 .into(binding.appIcon);
@@ -146,8 +172,8 @@ public class MainActivity extends BaseActivity {
                             getString(R.string.app_count_in_list),
                             UIDS.size(),
                             whiteListMode
-                                    ? getString(R.string.whitelist)
-                                    : getString(R.string.blacklist)));
+                            ? getString(R.string.whitelist)
+                            : getString(R.string.blacklist)));
         } else {
             setProxyCard("disabled");
             binding.appsSummary.setText(
@@ -155,8 +181,8 @@ public class MainActivity extends BaseActivity {
                             getString(R.string.app_count_in_list),
                             UIDS.size(),
                             whiteListMode
-                                    ? getString(R.string.whitelist)
-                                    : getString(R.string.blacklist)));
+                            ? getString(R.string.whitelist)
+                            : getString(R.string.blacklist)));
         }
         if (sp.getBoolean("cbLog", false)) {
             binding.lllog.setVisibility(View.VISIBLE);
@@ -175,7 +201,7 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, ""+ e, 0).show();
         }*/
     }
-
+    
     private void setProxyCard(String status) {
         int cardBackgroundColor;
         switch (status) {
@@ -191,6 +217,18 @@ public class MainActivity extends BaseActivity {
                 binding.statusIcon.setImageResource(R.drawable.ic_error);
                 binding.statusSummary.setText(MODULE_VERSION);
                 break;
+            case "loading":
+                binding.proxy.setCardBackgroundColor(Color.parseColor("#1A73E8"));
+                binding.statusTitle.setText(R.string.loading);
+                binding.statusIcon.setImageResource(R.drawable.ic_check_circle);
+                binding.statusSummary.setText(MODULE_VERSION);
+                break;
+            case "error":
+                binding.proxy.setCardBackgroundColor(Color.parseColor("#EF1A1A"));
+                binding.statusTitle.setText(R.string.error);
+                binding.statusIcon.setImageResource(R.drawable.ic_info);
+                binding.statusSummary.setText(MODULE_VERSION);
+                break;
             default:
                 binding.proxy.setCardBackgroundColor(Color.parseColor("#26b545"));
                 binding.statusTitle.setText(R.string.disabled);
@@ -198,16 +236,16 @@ public class MainActivity extends BaseActivity {
                 binding.statusSummary.setText(R.string.install_required);
         }
     }
-
+    
     private void settingCall() {
         final String[] strArr = {"Clash", "Sing-Box", "Xray", "V2fly"};
         final String[] strArrProc = {"Off", "Strict", "Always"};
         final String[] strNetworkMode = {"TPROXY", "REDIRECT", "MIXED"};
-
+        
         View inflate = LayoutInflater.from(this).inflate(R.layout.setting_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(inflate);
-
+        
         Button btncnf = inflate.findViewById(R.id.btnConfig);
         btncnf.setOnClickListener(new StartActivityListener(ConfigActivity.class));
         Button btnModule = inflate.findViewById(R.id.checkModule);
@@ -226,21 +264,23 @@ public class MainActivity extends BaseActivity {
                                             TermUtil.getUpdate();
                                         })
                                 .show();
-                    } else Toast.makeText(this, "No update found!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "No update found!", Toast.LENGTH_SHORT).show();
+                    }
                 });
-
+        
         Spinner spin = inflate.findViewById(R.id.coreSelector);
-
+        
         //    CLASH
         TextView clashSetTV = inflate.findViewById(R.id.clash1);
         LinearLayout llc1 = inflate.findViewById(R.id.clash2);
         LinearLayout llc4 = inflate.findViewById(R.id.clash5);
         LinearLayout llc5 = inflate.findViewById(R.id.clash6);
-
+        
         //   UI
         CheckBox cbLog = inflate.findViewById(R.id.showLog);
         cbLog.setChecked(sp.getBoolean("cbLog", false));
-
+        
         cbLog.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -256,7 +296,7 @@ public class MainActivity extends BaseActivity {
                 });
         CheckBox cbScrollLog = inflate.findViewById(R.id.scroLog);
         cbScrollLog.setChecked(sp.getBoolean("cbScroLog", false));
-
+        
         cbScrollLog.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -268,7 +308,7 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, 17367048, strArr);
         arrayAdapter.setDropDownViewResource(17367049);
         spin.setEnabled(!BaseActivity.isProxying);
@@ -318,17 +358,18 @@ public class MainActivity extends BaseActivity {
                         }
                         builder.setView(inflate);
                     }
-
+                    
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 });
-
+        
         Spinner spNM = inflate.findViewById(R.id.spNetworkMode);
         ArrayAdapter nmAdapter = new ArrayAdapter(this, 17367048, strNetworkMode);
         nmAdapter.setDropDownViewResource(17367049);
         //   spin.setEnabled(!BaseActivity.isProxying);
         spNM.setAdapter((SpinnerAdapter) nmAdapter);
-
+        
         if (TermUtil.getNetworkMode().contains("tpro")) {
             spNM.setSelection(0);
         } else if (TermUtil.getNetworkMode().contains("redir")) {
@@ -336,7 +377,7 @@ public class MainActivity extends BaseActivity {
         } else {
             spNM.setSelection(2);
         }
-
+        
         spNM.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -351,15 +392,16 @@ public class MainActivity extends BaseActivity {
                         }
                         builder.setView(inflate);
                     }
-
+                    
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 });
-
+        
         //   CLASH CHECKBOX
         CheckBox cbFakeIp = inflate.findViewById(R.id.fake_ip);
         cbFakeIp.setChecked(TermUtil.getFakeIp());
-
+        
         cbFakeIp.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -371,10 +413,10 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         CheckBox cbUnified = inflate.findViewById(R.id.unified_delay);
         cbUnified.setChecked(TermUtil.getUnified());
-
+        
         cbUnified.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -386,10 +428,10 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         CheckBox cbGeodata = inflate.findViewById(R.id.geodata_mod);
         cbGeodata.setChecked(TermUtil.getGeodata());
-
+        
         cbGeodata.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -401,10 +443,10 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         CheckBox cbSniffer = inflate.findViewById(R.id.snifferrs);
         cbSniffer.setChecked(TermUtil.getSniffer());
-
+        
         cbSniffer.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -416,10 +458,10 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         CheckBox cbPort = inflate.findViewById(R.id.port_detect);
         cbPort.setChecked(TermUtil.getPortDetect());
-
+        
         cbPort.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -431,10 +473,10 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         CheckBox cbIpv6 = inflate.findViewById(R.id.ipv6);
         cbIpv6.setChecked(TermUtil.getIpv6());
-
+        
         cbIpv6.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -446,12 +488,12 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         Spinner arSpin = inflate.findViewById(R.id.spFindProc);
         ArrayAdapter arprocAdapter = new ArrayAdapter(this, 17367048, strArrProc);
         arprocAdapter.setDropDownViewResource(17367049);
         arSpin.setAdapter((SpinnerAdapter) arprocAdapter);
-
+        
         if ("off".equals(TermUtil.getFindProc())) {
             arSpin.setSelection(0);
         } else if ("strict".equals(TermUtil.getFindProc())) {
@@ -473,42 +515,43 @@ public class MainActivity extends BaseActivity {
                         }
                         builder.setView(inflate);
                     }
-
+                    
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 });
-
+        
         Button btnIp = inflate.findViewById(R.id.checkIp);
         btnIp.setOnClickListener(
                 v -> {
                     dialogIP();
                 });
-
+        
         Button btnAkun = inflate.findViewById(R.id.freeAccount);
         btnAkun.setOnClickListener(
                 v -> {
                     dialogAkun();
                 });
-
+        
         Button btnAbt = inflate.findViewById(R.id.aboutApp);
         btnAbt.setOnClickListener(
                 v -> {
                     dialogAbout();
                 });
-
+        
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
                 .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
-
+    
     private class StartActivityListener implements View.OnClickListener {
         Class<?> clazz;
-
+        
         StartActivityListener(Class<?> clazz) {
             this.clazz = clazz;
         }
-
+        
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
@@ -516,7 +559,7 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
@@ -525,8 +568,8 @@ public class MainActivity extends BaseActivity {
                         getString(R.string.app_count_in_list),
                         UIDS.size(),
                         whiteListMode
-                                ? getString(R.string.whitelist)
-                                : getString(R.string.blacklist)));
+                        ? getString(R.string.whitelist)
+                        : getString(R.string.blacklist)));
 
         /*   if (CheckUpdate.check()) {
             binding.updaterSummary.setText(
@@ -536,40 +579,40 @@ public class MainActivity extends BaseActivity {
             binding.updater.setVisibility(View.GONE);
         }*/
     }
-
+    
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         TermUtil.close();
     }
-
+    
     @Override
     protected void onPause() {
         super.onPause();
     }
-
+    
     private void dialogIP() {
         View inflate = LayoutInflater.from(this).inflate(R.layout.ip_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(inflate);
-
+        
         TextView tv = inflate.findViewById(R.id.tvGeo);
         tv.setText(HttpGetter.geoo());
-
+        
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
                 .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
-
+    
     private void dialogAkun() {
         View inflate = LayoutInflater.from(this).inflate(R.layout.account_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(inflate);
-
+        
         final String[] strArrVpn = {"", "raw", "clash", "surfboard"};
         final String[] strArrMode = {"", "cdn", "sni"};
-
+        
         EditText vpKey = inflate.findViewById(R.id.vpnbKey);
         vpKey.setText(sp.getString("vpKey", ""));
         EditText nwKey = inflate.findViewById(R.id.networkKey);
@@ -582,13 +625,13 @@ public class MainActivity extends BaseActivity {
         lmtKey.setText(sp.getString("lmtKey", ""));
         EditText cntKey = inflate.findViewById(R.id.countryKey);
         cntKey.setText(sp.getString("cntKey", ""));
-        cntKey.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-
+        cntKey.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+        
         Spinner spKey = inflate.findViewById(R.id.formatKey);
         Spinner mdKey = inflate.findViewById(R.id.modeKey);
-
+        
         CheckBox cbTls = inflate.findViewById(R.id.tlsKey);
-
+        
         fcSpin(strArrVpn, spKey);
         fcSpin(strArrMode, mdKey);
         mm = "https://fool.azurewebsites.net/get?";
@@ -615,11 +658,12 @@ public class MainActivity extends BaseActivity {
                             sp.edit().putInt("spKey", 3).apply();
                         }
                     }
-
+                    
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 });
-
+        
         mdKey.setSelection(sp.getInt("mdKey", 0));
         mdKey.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -639,11 +683,12 @@ public class MainActivity extends BaseActivity {
                             sp.edit().putInt("mdKey", 2).apply();
                         }
                     }
-
+                    
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 });
-
+        
         cbTls.setChecked(sp.getBoolean("cbTls", false));
         cbTls.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -658,7 +703,7 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 });
-
+        
         Button btnGen = inflate.findViewById(R.id.generate);
         btnGen.setOnClickListener(
                 v -> {
@@ -698,7 +743,7 @@ public class MainActivity extends BaseActivity {
                         limit = "&limit=" + lmtKey.getText().toString();
                         sp.edit().putString("lmtKey", lmtKey.getText().toString()).apply();
                     }
-
+                    
                     String res =
                             HttpGetter.getConfig(
                                     mm + format + mode + vpnGet + cc + network + tls + sni + limit
@@ -718,22 +763,22 @@ public class MainActivity extends BaseActivity {
         create.getWindow()
                 .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
-
+    
     private void dialogAbout() {
         View inflate = LayoutInflater.from(this).inflate(R.layout.about_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(inflate);
-
+        
         TextView tv = inflate.findViewById(R.id.tvAbout);
         tv.setText(
                 "App Dev by t.me/chetoosz\nScript & module by t.me/mje02\nAccount API by t.me/d_fordlalatina \n\n\nThanks to All\nWe made this with ♥️\n99,9% free to use ");
-
+        
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
                 .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
-
+    
     private void fcSpin(String[] arr, Spinner spin) {
         ArrayAdapter ad = new ArrayAdapter(this, 17367048, arr);
         ad.setDropDownViewResource(17367049);
