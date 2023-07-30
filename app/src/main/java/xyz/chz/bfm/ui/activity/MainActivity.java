@@ -134,17 +134,17 @@ public class MainActivity extends BaseActivity {
                                                 binding.logStatus.setText(
                                                         Html.fromHtml(
                                                                 bb.replaceAll(
-                                                                                "\\[info\\]",
-                                                                                "<font color=\"#58869e\">[info] </font>")
+                                                                                "\\[Info\\]",
+                                                                                "<font color=\"#58869e\">[Info] </font>")
                                                                         .replaceAll(
-                                                                                "\\[debug\\]",
-                                                                                "<font color=\"#156238\">[debug] </font>")
+                                                                                "\\[Debug\\]",
+                                                                                "<font color=\"#156238\">[Debug] </font>")
                                                                         .replaceAll(
-                                                                                "\\[error\\]",
-                                                                                "<font color=\"#8e2e41\">[error] </font>")
+                                                                                "\\[Error\\]",
+                                                                                "<font color=\"#8e2e41\">[Error] </font>")
                                                                         .replaceAll(
-                                                                                "\\[warn\\]",
-                                                                                "<font color=\"#fe9a01\">[warning] </font>")
+                                                                                "\\[Warning\\]",
+                                                                                "<font color=\"#fe9a01\">[Warning] </font>")
                                                                         .replaceAll("\n", "<br>")));
                                                 if (sp.getBoolean("cbScroLog", false)) {
                                                     binding.svLOG.fullScroll(View.FOCUS_DOWN);
@@ -238,9 +238,9 @@ public class MainActivity extends BaseActivity {
     }
     
     private void settingCall() {
-        final String[] strArr = {"Clash", "Sing-Box", "Xray", "V2fly"};
-        final String[] strArrProc = {"Off", "Strict", "Always"};
-        final String[] strNetworkMode = {"TPROXY", "REDIRECT", "MIXED"};
+        final String[] strArr = {"clash", "sing-box", "xray", "v2fly"};
+        final String[] strArrProc = {"off", "strict", "always"};
+        final String[] strNetworkMode = {"tproxy", "redirect", "mixed"};
         
         View inflate = LayoutInflater.from(this).inflate(R.layout.setting_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -265,7 +265,7 @@ public class MainActivity extends BaseActivity {
                                         })
                                 .show();
                     } else {
-                        Toast.makeText(this, "No update found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "no update found!", Toast.LENGTH_SHORT).show();
                     }
                 });
         
@@ -291,20 +291,6 @@ public class MainActivity extends BaseActivity {
                         } else {
                             sp.edit().putBoolean("cbLog", false).apply();
                             binding.lllog.setVisibility(View.GONE);
-                        }
-                    }
-                });
-        CheckBox cbScrollLog = inflate.findViewById(R.id.scroLog);
-        cbScrollLog.setChecked(sp.getBoolean("cbScroLog", false));
-        
-        cbScrollLog.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            sp.edit().putBoolean("cbScroLog", true).apply();
-                        } else {
-                            sp.edit().putBoolean("cbScroLog", false).apply();
                         }
                     }
                 });
@@ -526,13 +512,7 @@ public class MainActivity extends BaseActivity {
                 v -> {
                     dialogIP();
                 });
-        
-        Button btnAkun = inflate.findViewById(R.id.freeAccount);
-        btnAkun.setOnClickListener(
-                v -> {
-                    dialogAkun();
-                });
-        
+
         Button btnAbt = inflate.findViewById(R.id.aboutApp);
         btnAbt.setOnClickListener(
                 v -> {
@@ -604,166 +584,7 @@ public class MainActivity extends BaseActivity {
         create.getWindow()
                 .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
-    
-    private void dialogAkun() {
-        View inflate = LayoutInflater.from(this).inflate(R.layout.account_dialog, (ViewGroup) null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(inflate);
-        
-        final String[] strArrVpn = {"", "raw", "clash", "surfboard"};
-        final String[] strArrMode = {"", "cdn", "sni"};
-        
-        EditText vpKey = inflate.findViewById(R.id.vpnbKey);
-        vpKey.setText(sp.getString("vpKey", ""));
-        EditText nwKey = inflate.findViewById(R.id.networkKey);
-        nwKey.setText(sp.getString("nwKey", ""));
-        EditText snKey = inflate.findViewById(R.id.sniKey);
-        snKey.setText(sp.getString("snKey", ""));
-        EditText cdKey = inflate.findViewById(R.id.cdnKey);
-        cdKey.setText(sp.getString("cdKey", ""));
-        EditText lmtKey = inflate.findViewById(R.id.limitKey);
-        lmtKey.setText(sp.getString("lmtKey", ""));
-        EditText cntKey = inflate.findViewById(R.id.countryKey);
-        cntKey.setText(sp.getString("cntKey", ""));
-        cntKey.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        
-        Spinner spKey = inflate.findViewById(R.id.formatKey);
-        Spinner mdKey = inflate.findViewById(R.id.modeKey);
-        
-        CheckBox cbTls = inflate.findViewById(R.id.tlsKey);
-        
-        fcSpin(strArrVpn, spKey);
-        fcSpin(strArrMode, mdKey);
-        mm = "https://fool.azurewebsites.net/get?";
-        spKey.setSelection(sp.getInt("spKey", 0));
-        spKey.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            format = "";
-                            sp.edit().putInt("spKey", 0).apply();
-                        }
-                        if (i == 1) {
-                            format = "&format=raw";
-                            sp.edit().putInt("spKey", 1).apply();
-                        }
-                        if (i == 2) {
-                            format = "&format=clash";
-                            sp.edit().putInt("spKey", 2).apply();
-                        }
-                        if (i == 3) {
-                            format = "&format=surfboard";
-                            sp.edit().putInt("spKey", 3).apply();
-                        }
-                    }
-                    
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
-        
-        mdKey.setSelection(sp.getInt("mdKey", 0));
-        mdKey.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            mode = "";
-                            sp.edit().putInt("mdKey", 0).apply();
-                        }
-                        if (i == 1) {
-                            mode = "&mode=cdn";
-                            sp.edit().putInt("mdKey", 1).apply();
-                        }
-                        if (i == 2) {
-                            mode = "&mode=sni";
-                            sp.edit().putInt("mdKey", 2).apply();
-                        }
-                    }
-                    
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
-        
-        cbTls.setChecked(sp.getBoolean("cbTls", false));
-        cbTls.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            tls = "&tls=1";
-                            sp.edit().putBoolean("cbTls", true).apply();
-                        } else {
-                            tls = "";
-                            sp.edit().putBoolean("cbTls", false).apply();
-                        }
-                    }
-                });
-        
-        Button btnGen = inflate.findViewById(R.id.generate);
-        btnGen.setOnClickListener(
-                v -> {
-                    if (vpKey.getText().toString().isEmpty()) {
-                        vpnGet = "";
-                    } else {
-                        vpnGet = "&vpn=" + vpKey.getText().toString();
-                        sp.edit().putString("vpKey", vpKey.getText().toString()).apply();
-                    }
-                    if (cntKey.getText().toString().isEmpty()) {
-                        cc = "";
-                    } else {
-                        cc = "&cc=" + cntKey.getText().toString();
-                        sp.edit().putString("cntKey", cntKey.getText().toString()).apply();
-                    }
-                    if (nwKey.getText().toString().isEmpty()) {
-                        network = "";
-                    } else {
-                        network = "&network=" + nwKey.getText().toString();
-                        sp.edit().putString("nwKey", nwKey.getText().toString()).apply();
-                    }
-                    if (snKey.getText().toString().isEmpty()) {
-                        sni = "";
-                    } else {
-                        sni = "&sni=" + snKey.getText().toString();
-                        sp.edit().putString("snKey", snKey.getText().toString()).apply();
-                    }
-                    if (cdKey.getText().toString().isEmpty()) {
-                        cdn = "";
-                    } else {
-                        cdn = "&cdn=" + cdKey.getText().toString();
-                        sp.edit().putString("cdKey", cdKey.getText().toString()).apply();
-                    }
-                    if (lmtKey.getText().toString().isEmpty()) {
-                        limit = "";
-                    } else {
-                        limit = "&limit=" + lmtKey.getText().toString();
-                        sp.edit().putString("lmtKey", lmtKey.getText().toString()).apply();
-                    }
-                    
-                    String res =
-                            HttpGetter.getConfig(
-                                    mm + format + mode + vpnGet + cc + network + tls + sni + limit
-                                            + cdn);
-                    new AlertDialog.Builder(this)
-                            .setTitle("Result: ")
-                            .setMessage(res)
-                            .setPositiveButton(
-                                    "Copy",
-                                    (dialog, which) -> {
-                                        HttpGetter.copyToClipboard(this, res);
-                                    })
-                            .show();
-                });
-        final AlertDialog create = builder.create();
-        create.show();
-        create.getWindow()
-                .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
-    }
-    
+
     private void dialogAbout() {
         View inflate = LayoutInflater.from(this).inflate(R.layout.about_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -771,7 +592,7 @@ public class MainActivity extends BaseActivity {
         
         TextView tv = inflate.findViewById(R.id.tvAbout);
         tv.setText(
-                "App Dev by t.me/chetoosz\nScript & module by t.me/mje02\nAccount API by t.me/d_fordlalatina \n\n\nThanks to All\nWe made this with ♥️\n99,9% free to use ");
+                "app by: t.me/chetoosz\nmodule by: t.me/taamarin");
         
         final AlertDialog create = builder.create();
         create.show();

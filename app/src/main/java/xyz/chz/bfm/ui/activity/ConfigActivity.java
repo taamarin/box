@@ -106,24 +106,24 @@ public class ConfigActivity extends BaseActivity {
             if (ProxyUtil.getCore().contains("cla")) {
                 fos.write(binding.conf.getText().toString().getBytes());
                 TermUtil.setConf("clash", true);
-                Toast.makeText(this, "Config saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "config saved", Toast.LENGTH_SHORT).show();
             } else if (ProxyUtil.getCore().contains("sing")) {
                 fos.write(filecontent.getBytes());
                 if (isJSONValid(binding.conf.getText().toString())) {
                     TermUtil.setConf("sing-box", false);
-                    Toast.makeText(this, "Config saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "config saved", Toast.LENGTH_SHORT).show();
                 }
             } else if (ProxyUtil.getCore().contains("xr")) {
                 fos.write(filecontent.getBytes());
                 if (isJSONValid(binding.conf.getText().toString())) {
                     TermUtil.setConf("xray", false);
-                    Toast.makeText(this, "Config saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "config saved", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 fos.write(filecontent.getBytes());
                 if (isJSONValid(binding.conf.getText().toString())) {
                     TermUtil.setConf("v2fly", false);
-                    Toast.makeText(this, "Config saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "config saved", Toast.LENGTH_SHORT).show();
                 }
             }
         } catch (FileNotFoundException e) {

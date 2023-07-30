@@ -14,8 +14,8 @@ android {
         applicationId "xyz.chz.bfm"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 20230331
-        versionName "2.0.6"
+        versionCode 20230730
+        versionName "2.0.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

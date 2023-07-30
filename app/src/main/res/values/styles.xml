@@ -20,5 +20,7 @@
 
 <resources>
 
-    <style name="AppTheme" parent="Theme.Light" />
+    <style
+        name="AppTheme"
+        parent="Theme.Light" />
 </resources>

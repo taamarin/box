@@ -14,16 +14,19 @@ import xyz.chz.bfm.R;
 import rikka.core.util.ResourceUtils;
 import rikka.material.app.DayNightDelegate;
 
-public class ThemeUtil {
-    private static final Map<String, Integer> colorThemeMap = new HashMap<>();
-    private static final SharedPreferences preferences;
+public final class ThemeUtil {
+    private static final SharedPreferences preferences = App.getPreferences();
 
     public static final String MODE_NIGHT_FOLLOW_SYSTEM = "MODE_NIGHT_FOLLOW_SYSTEM";
     public static final String MODE_NIGHT_NO = "MODE_NIGHT_NO";
     public static final String MODE_NIGHT_YES = "MODE_NIGHT_YES";
 
+    private static final String THEME_DEFAULT = "DEFAULT";
+    private static final String THEME_BLACK = "BLACK";
+
+    private static final Map<String, Integer> colorThemeMap = new HashMap<>();
+
     static {
-        preferences = App.getPreferences();
         colorThemeMap.put("COLOR_PRIMARY", R.style.ThemeOverlay_color_primary);
         colorThemeMap.put("MATERIAL_RED", R.style.ThemeOverlay_material_red);
         colorThemeMap.put("MATERIAL_PINK", R.style.ThemeOverlay_material_pink);
@@ -46,16 +49,12 @@ public class ThemeUtil {
         colorThemeMap.put("MATERIAL_BLUE_GREY", R.style.ThemeOverlay_material_blue_grey);
     }
 
-    private static final String THEME_DEFAULT = "DEFAULT";
-    private static final String THEME_BLACK = "BLACK";
-
     private static boolean isBlackNightTheme() {
         return preferences.getBoolean("black_dark_theme", false);
     }
 
     public static String getNightTheme(Context context) {
-        if (isBlackNightTheme()
-                && ResourceUtils.isNightMode(context.getResources().getConfiguration())) {
+        if (isBlackNightTheme() && ResourceUtils.isNightMode(context.getResources().getConfiguration())) {
             return THEME_BLACK;
         }
         return THEME_DEFAULT;
@@ -73,14 +72,7 @@ public class ThemeUtil {
     }
 
     public static String getColorTheme() {
-        String primaryColorEntryName = "COLOR_PRIMARY";
-        String colorPrimary = preferences.getString("theme_color", "COLOR_PRIMARY");
-        for (CustomThemeColors color : CustomThemeColors.values()) {
-            if (color.toString().equals(colorPrimary)) {
-                primaryColorEntryName = color.toString();
-            }
-        }
-        return primaryColorEntryName;
+        return preferences.getString("theme_color", "COLOR_PRIMARY");
     }
 
     @StyleRes
@@ -114,12 +106,14 @@ public class ThemeUtil {
         MATERIAL_GREY(R.color.material_grey),
         MATERIAL_BLUE_GREY(R.color.material_blue_grey);
 
-        @ColorRes int resourceId;
+        @ColorRes
+        private final int resourceId;
 
         CustomThemeColors(@ColorRes int resourceId) {
             this.resourceId = resourceId;
         }
 
+        @ColorRes
         public int getResourceId() {
             return resourceId;
         }

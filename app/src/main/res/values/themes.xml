@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ This file is part of LSPosed.
   ~
   ~ LSPosed is free software: you can redistribute it and/or modify
@@ -19,7 +20,9 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Base.AppTheme.Light" parent="Theme.Material.Light.LightStatusBar">
+    <style
+        name="Base.AppTheme.Light"
+        parent="Theme.Material.Light.LightStatusBar">
         <item name="android:statusBarColor">?android:colorBackground</item>
 
         <item name="colorPrimary">@color/material_blue_700</item>
@@ -44,15 +47,21 @@
         <item name="windowNoTitle">true</item>
 
         <!-- MIUI -->
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item
+            name="android:forceDarkAllowed"
+            tools:targetApi="q">false</item>
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
     </style>
 
-    <style name="Theme.Light" parent="Base.AppTheme.Light" />
+    <style
+        name="Theme.Light"
+        parent="Base.AppTheme.Light" />
 
-    <style name="Base.AppTheme" parent="Theme.Material">
+    <style
+        name="Base.AppTheme"
+        parent="Theme.Material">
         <item name="colorPrimary">@color/material_blue_700</item>
         <item name="colorPrimaryVariant">?colorPrimary</item>
         <item name="colorSecondary">?colorPrimary</item>
@@ -75,22 +84,30 @@
         <item name="windowNoTitle">true</item>
 
         <!-- MIUI -->
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item
+            name="android:forceDarkAllowed"
+            tools:targetApi="q">false</item>
 
         <!-- Preference title -->
         <item name="android:textAppearanceListItem">?textAppearanceSubtitle1</item>
     </style>
 
-    <style name="Theme" parent="Base.AppTheme" />
+    <style
+        name="Theme"
+        parent="Base.AppTheme" />
 
-    <style name="Widget.AppBar" parent="">
+    <style
+        name="Widget.AppBar"
+        parent="">
         <item name="android:background">?toolbarColor</item>
         <item name="android:theme">?actionBarTheme</item>
         <item name="android:stateListAnimator">@animator/raise_animator</item>
         <item name="android:elevation">2dp</item>
     </style>
 
-    <style name="Widget.Material.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+    <style
+        name="Widget.Material.Toolbar"
+        parent="Widget.MaterialComponents.Toolbar">
         <item name="android:background">?android:colorBackground</item>
     </style>
 
@@ -105,7 +122,9 @@
         <item name="android:stateListAnimator">@animator/raise_animator</item>
     </style>
 
-    <style name="ThemeOverlay.ActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+    <style
+        name="ThemeOverlay.ActionBar"
+        parent="ThemeOverlay.MaterialComponents.ActionBar">
         <item name="elevation">0dp</item>
         <item name="titleTextAppearance">
             @android:style/TextAppearance.Material.Widget.Toolbar.Title
@@ -115,7 +134,9 @@
         </item>
     </style>
 
-    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style
+        name="Widget.App.Button.OutlinedButton.IconOnly"
+        parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>

@@ -10,7 +10,7 @@ import rikka.material.app.DayNightDelegate;
 
 public class App extends Application {
     @SuppressLint("StaticFieldLeak")
-    public static final String TAG = "BoxForMagiskManager";
+    public static final String TAG = "BoxForRootManager";
 
     private static App instance = null;
     private SharedPreferences pref;

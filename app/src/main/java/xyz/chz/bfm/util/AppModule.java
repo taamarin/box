@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
-// import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
-// import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.caverock.androidsvg.SVG;
 import xyz.chz.bfm.R;
@@ -28,8 +26,6 @@ public class AppModule extends AppGlideModule {
         int iconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
         registry.prepend(PackageInfo.class, Bitmap.class, new AppIconModelLoader.Factory(iconSize,
                 context.getApplicationInfo().loadIcon(context.getPackageManager()) instanceof AdaptiveIconDrawable, context));
-        // OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(App.getOkHttpClient());
-        // registry.replace(GlideUrl.class, InputStream.class, factory);
         SVG.registerExternalFileResolver(new ExternalFileResolver());
         registry.register(SVG.class, Drawable.class, new SvgDrawableTranscoder(context))
                 .append(InputStream.class, SVG.class, new SvgDecoder());
