@@ -69,6 +69,7 @@ public class HttpGetter {
             }
             JSONObject geo = new JSONObject(result.toString());
             StringBuffer sb = new StringBuffer();
+            sb.append("\n").append("IP: ").append(geo.getString("query"));
             sb.append("\n").append("ISP: ").append(geo.getString("isp"));
             sb.append("\n").append("Time Zone: ").append(geo.getString("timezone"));
             sb.append("\n").append("Country Code: ").append(geo.getString("countryCode"));

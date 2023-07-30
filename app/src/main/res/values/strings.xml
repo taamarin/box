@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Box for Root</string>
-    <string name="app_version">2.0.6</string>
+    <string name="app_version">2.0.7-debug</string>
     <!-- BaseActivity -->
-    <string name="min_module_version">20230405</string>
+    <string name="min_module_version">20230725</string>
     <string name="need_install_module">please install the Box for Root module first!</string>
     <string name="need_update_module">please update your Box for Root module to at least %s !</string>
     <string name="module_repo_url">https://github.com/taamarin/box_for_magisk</string>

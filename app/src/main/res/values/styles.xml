@@ -18,9 +18,14 @@
   ~ Copyright (C) 2021 LSPosed Contributors
   -->
 
+<!--
 <resources>
-
     <style
         name="AppTheme"
-        parent="Theme.Light" />
+        parent="Base.AppTheme" />
+</resources>
+-->
+
+<resources>
+    <style name="AppTheme" parent="Theme.Light" />
 </resources>

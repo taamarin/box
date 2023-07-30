@@ -14,14 +14,13 @@ jobs:
 
     steps:
     - name: checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: setup JDK 17 with distribution
       uses: actions/setup-java@v2
       with:
         java-version: 17
         distribution: zulu
-        local-cache: true
 
     - name: build
       uses: gradle/gradle-build-action@v2
@@ -68,7 +67,7 @@ jobs:
     - name: find APKs
       run: |
         mkdir APKs
-        mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-prerelease-signed.apk
+        mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-$(git rev-parse --short HEAD)_$(date +%m%d%M)-signed.apk
 
     - name: upload to telegram
       env:
@@ -81,7 +80,7 @@ jobs:
         RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         TITLE: BFR Manager
       run: |
-        export VERSION=$(date +%m%d)
+        export VERSION=$(git rev-parse --short HEAD)
         FILE=$(find ./APKs/* -type f)
         pip3 install python-telegram-bot
         python3 docs/tubot.py $FILE

@@ -32,16 +32,17 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
             android:text="select core :" />
 
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
             android:layout_weight="0">
 
             <Spinner
@@ -58,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:visibility="gone"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
             android:text="clash settings:"
             android:id="@+id/clash1" />
 
@@ -75,14 +77,12 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_marginLeft="9dp"
-                android:textColor="#000000"
                 android:layout_weight="1.6"
                 android:text="find-procces" />
 
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                android:textColor="#000000"
                 android:layout_weight="0.1"
                 android:text=" :" />
 
@@ -150,10 +150,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="0"
+            android:id="@+id/clash7">
+
+            <CheckBox
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:id="@+id/subs"
+                android:text="subscription" />
+
+        </LinearLayout>
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
             android:text="ui settings:" />
 
         <LinearLayout
@@ -169,23 +189,23 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/showLog"
-                android:text="show logs" />
-            <!--
+                android:text="logs" />
+
             <CheckBox
-                 android:layout_height="wrap_content"
-                 android:layout_width="0dp"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/scroLog"
-                 android:text="auto scroll log" />
-             -->
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:id="@+id/quic"
+                android:text="Quic" />
 
         </LinearLayout>
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginLeft="9dp"
             android:text="module settings:" />
 
         <LinearLayout
@@ -220,59 +240,127 @@
             android:orientation="horizontal"
             android:layout_weight="0">
 
-            <TextView
+            <CheckBox
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                android:layout_marginLeft="9dp"
-                android:textColor="#000000"
-                android:layout_weight="1.6"
-                android:text="network-mode" />
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:textColor="#000000"
-                android:layout_weight="0.1"
-                android:text=" :" />
-
-            <Spinner
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:layout_weight="1.5"
-                android:id="@+id/spNetworkMode" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0">
-
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="0dp"
-                android:background="@android:color/transparent"
                 android:textSize="12sp"
-                android:textColor="#000000"
                 android:layout_weight="1"
-                android:id="@+id/checkIp"
-                android:text="MyIP" />
+                android:id="@+id/cron"
+                android:text="crontab" />
 
-            <!--
-            <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="0dp"
-                 android:background="@android:color/transparent"
-                 android:textSize="12sp"
-                 android:textColor="#000000"
-                 android:layout_weight="1"
-                 android:id="@+id/freeAccount"
-                 android:text="free account" />
-            -->
+            <CheckBox
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:id="@+id/geo"
+                android:text="Xgeo" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="0">
+
+            <CheckBox
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:id="@+id/cgr"
+                android:text="cgroup" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.6"
+                    android:layout_marginLeft="9dp"
+                    android:text="NetworkMode" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text=":" />
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:textSize="8sp"
+                    android:id="@+id/spNetworkMode" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.6"
+                    android:layout_marginLeft="9dp"
+                    android:text="ProxyMode" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text=":" />
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:textSize="8sp"
+                    android:id="@+id/spProxyMode" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.6"
+                    android:layout_marginLeft="9dp"
+                    android:text="CronJob" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.1"
+                    android:text=":" />
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:textSize="8sp"
+                    android:id="@+id/spCronJob" />
+            </LinearLayout>           
         </LinearLayout>
 
         <LinearLayout
@@ -286,8 +374,8 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:background="@android:color/transparent"
+                android:textColor="@color/material_black_1000"
                 android:textSize="12sp"
-                android:textColor="#000000"
                 android:layout_weight="1"
                 android:id="@+id/checkModule"
                 android:text="check module" />
@@ -296,8 +384,18 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:background="@android:color/transparent"
+                android:textColor="@color/material_black_1000"
                 android:textSize="12sp"
-                android:textColor="#000000"
+                android:layout_weight="1"
+                android:id="@+id/checkIp"
+                android:text="MyIP" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/material_black_1000"
+                android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/aboutApp"
                 android:text="about" />
