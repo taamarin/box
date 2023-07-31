@@ -111,7 +111,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/unified_delay"
-                android:text="unified-delay" />
+                android:text="fake-tcp [meta]" />
 
             <CheckBox
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/snifferrs"
-                android:text="sniffer" />
+                android:text="sniffer [meta]" />
 
         </LinearLayout>
 
@@ -146,7 +146,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/geodata_mod"
-                android:text="geodata-mode" />
+                android:text="geodata [meta] " />
 
         </LinearLayout>
 
