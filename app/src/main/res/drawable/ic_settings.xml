@@ -1,56 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Open VIP can improve the speed of decompilation, resource code translate to name automatically and activate the smart editing and automatic completion function-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:height="64dp"
     android:width="64dp"
     android:viewportWidth="24.0"
     android:viewportHeight="24.0">
     <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M9,22H15C20,22 22,20 22,15V9C22,4 20,2 15,2H9C4,2 2,4 2,9V15C2,20 4,22 9,22Z"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M15.57,18.5V14.6"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M15.57,7.45V5.5"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M15.57,12.65C17.006,12.65 18.17,11.486 18.17,10.05C18.17,8.614 17.006,7.45 15.57,7.45C14.134,7.45 12.97,8.614 12.97,10.05C12.97,11.486 14.134,12.65 15.57,12.65Z"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M8.43,18.5V16.55"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M8.43,9.4V5.5"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
-    <path
-        android:fillColor="@color/material_white_1000"
-        android:pathData="M8.43,16.55C9.866,16.55 11.03,15.386 11.03,13.95C11.03,12.514 9.866,11.35 8.43,11.35C6.994,11.35 5.83,12.514 5.83,13.95C5.83,15.386 6.994,16.55 8.43,16.55Z"
-        android:strokeColor="#FF292D32"
-        android:strokeWidth="1.5"
-        android:strokeLineCap="round"
-        android:strokeLineJoin="round" />
+        android:fillColor="@color/color_primary"
+        android:pathData="M9.965,2.809C9.596,2.543 9.076,2.419 8.564,2.606C7.467,3.008 6.46,3.596 5.582,4.331C5.165,4.68 5.013,5.192 5.058,5.644C5.133,6.397 5,7.124 4.639,7.75C4.277,8.377 3.713,8.856 3.023,9.167C2.609,9.354 2.241,9.743 2.148,10.28C2.05,10.84 2,11.414 2,12C2,12.586 2.05,13.161 2.148,13.72C2.241,14.257 2.609,14.646 3.023,14.833C3.713,15.145 4.277,15.623 4.639,16.25C5,16.877 5.133,17.603 5.058,18.356C5.013,18.808 5.165,19.32 5.582,19.669C6.46,20.404 7.467,20.992 8.564,21.394C9.076,21.581 9.596,21.457 9.965,21.191C10.579,20.749 11.276,20.5 12,20.5C12.724,20.5 13.421,20.749 14.035,21.191C14.404,21.457 14.925,21.581 15.436,21.394C16.533,20.992 17.54,20.404 18.418,19.669C18.835,19.32 18.987,18.808 18.942,18.356C18.867,17.603 18.999,16.877 19.361,16.25C19.723,15.623 20.287,15.145 20.977,14.833C21.391,14.646 21.759,14.257 21.853,13.72C21.949,13.161 22,12.586 22,12C22,11.414 21.949,10.84 21.853,10.28C21.759,9.743 21.391,9.354 20.977,9.167C20.287,8.856 19.723,8.377 19.361,7.75C18.999,7.124 18.867,6.397 18.942,5.644C18.987,5.192 18.835,4.68 18.418,4.331C17.54,3.596 16.533,3.008 15.436,2.606C14.924,2.419 14.404,2.543 14.035,2.809C13.421,3.251 12.724,3.5 12,3.5C11.276,3.5 10.579,3.251 9.965,2.809ZM9,12C9,10.343 10.343,9 12,9C13.657,9 15,10.343 15,12C15,13.657 13.657,15 12,15C10.343,15 9,13.657 9,12Z"
+        android:strokeColor="#00000000"
+        android:strokeWidth="1.0"
+        android:fillType="evenOdd" />
 </vector>

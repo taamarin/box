@@ -16,16 +16,25 @@
   ~
   ~ Copyright (C) 2020 EdXposed Contributors
   ~ Copyright (C) 2021 LSPosed Contributors
-  -->
 
-<!--
 <resources>
     <style
         name="AppTheme"
         parent="Base.AppTheme" />
 </resources>
--->
 
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:textDirection">locale</item>
+        <item name="android:statusBarColor">@color/color_primary</item>
+        <item name="colorPrimary">?android:attr/colorAccent</item>
+        <item name="colorSecondary">@color/google_blue_600</item>
+        <item name="colorOnPrimary">?android:attr/textColorPrimary</item>
+    </style>
+</resources>
+-->
 <resources>
     <style name="AppTheme" parent="Theme.Light" />
 </resources>
