@@ -31,14 +31,22 @@ jobs:
       run: |
         ls app/build/outputs/apk/release
     
-    - name: sign APKs
-      uses: r0adkll/sign-android-release@v1
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      # ID used to access action output
+      id: sign_apks
       with:
         releaseDirectory: app/build/outputs/apk/release
         alias: key.alias
         keyPassword: ${{ secrets.KEY_PASSWORD }}
         signingKeyBase64: ${{ secrets.KEYSTORE_CONTENT }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+
+    # Example use of `signedReleaseFile` output -- not needed
+    - uses: actions/upload-artifact@v2
+      with:
+        name: signed app bundle
+        path: ${{steps.sign_apks.outputs.signedReleaseFile}}
 
     - name: delete current Prerelease-alpha assets
       uses: andreaswilli/delete-release-assets-action@v2.0.0
@@ -67,7 +75,7 @@ jobs:
     - name: find APKs
       run: |
         mkdir APKs
-        mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-$(git rev-parse --short HEAD)_$(date +%m%d%M)-signed.apk
+        mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-$(git rev-parse --short HEAD)-signed.apk
 
     - name: upload to telegram
       env:
