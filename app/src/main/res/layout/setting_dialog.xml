@@ -174,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_marginStart="9dp"
             android:layout_marginLeft="9dp"
-            android:text="ui settings:" />
+            android:text="module settings:" />
 
         <LinearLayout
             android:layout_height="wrap_content"
@@ -200,13 +200,6 @@
                 android:text="Quic" />
 
         </LinearLayout>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:text="module settings:" />
 
         <LinearLayout
             android:layout_height="wrap_content"
