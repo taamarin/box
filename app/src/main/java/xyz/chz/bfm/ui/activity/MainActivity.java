@@ -123,14 +123,7 @@ public class MainActivity extends BaseActivity {
                                         new Runnable() {
                                             @Override
                                             public void run() {
-                                                try {
-                                                    bb =
-                                                            new String(
-                                                                    ProxyUtil.isReadLog()
-                                                                            .getBytes("ISO-8859-1"),
-                                                                    "UTF-8");
-                                                } catch (UnsupportedEncodingException e) {
-                                                }
+                                                bb = ProxyUtil.isReadLog();
                                                 binding.logStatus.setText(
                                                         Html.fromHtml(
                                                                 bb.replaceAll(

@@ -59,13 +59,11 @@ public class ConfigActivity extends BaseActivity {
         bar.setTitle(R.string.config_title);
         bar.setSubtitle(R.string.config_summary);
 
-        try {
-            A1 = new String(TermUtil.getConf("clash", true).getBytes("ISO-8859-1"), "UTF-8");
-            A2 = new String(TermUtil.getConf("sing-box", false).getBytes("ISO-8859-1"), "UTF-8");
-            A3 = new String(TermUtil.getConf("xray", false).getBytes("ISO-8859-1"), "UTF-8");
-            A4 = new String(TermUtil.getConf("v2fly", false).getBytes("ISO-8859-1"), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-        }
+        A1 = TermUtil.getConf("clash", true);
+        A2 = TermUtil.getConf("sing-box", false);
+        A3 = TermUtil.getConf("xray", false);
+        A4 = TermUtil.getConf("v2fly", false);
+
         filename = "output.txt";
         filepath = "gg";
         if (ProxyUtil.getCore().contains("cla")) {

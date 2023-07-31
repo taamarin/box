@@ -14,7 +14,7 @@ public class TermUtil {
 
     public static String getNameClashConf(String what, boolean isClash) {
         String m = isClash ? "yaml" : "json";
-        return MagiskHelper.execRootCmd("find /data/adb/box/" + what + "/ -name '*." + m + "' -type f -printf '%f\n'");
+        return MagiskHelper.execRootCmd("find /data/adb/box/" + what + "/ -maxdepth 1 -name 'config." + m + "' -type f -printf '%f\n'");
     }
 
     public static String getConf(String what, boolean isClash) {
