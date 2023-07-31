@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.text.Layout; // Import the Layout class
 import android.util.AttributeSet;
 
 public class MyEdittext extends androidx.appcompat.widget.AppCompatEditText {
     private final Context context;
     private Rect rect;
     private Paint paint;
+    private int lastVisibleLine = 0;
 
     public MyEdittext(Context context) {
         super(context);
@@ -42,7 +44,6 @@ public class MyEdittext extends androidx.appcompat.widget.AppCompatEditText {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
         int baseline;
         int lineCount = getLineCount();
         int lineNumber = 1;
@@ -57,13 +58,20 @@ public class MyEdittext extends androidx.appcompat.widget.AppCompatEditText {
                 ++lineNumber;
             }
         }
-        if (lineCount < 100) {
+
+        // Update lastVisibleLine
+        Layout layout = getLayout();
+        int scrollY = getScrollY();
+        lastVisibleLine = layout.getLineForVertical(scrollY + getHeight());
+
+        // Adjust padding based on the lastVisibleLine
+        if (lastVisibleLine < 100) {
             setPadding(45, getPaddingTop(), getPaddingRight(), getPaddingBottom());
-        } else if (lineCount > 99 && lineCount < 1000) {
+        } else if (lastVisibleLine > 99 && lastVisibleLine < 1000) {
             setPadding(63, getPaddingTop(), getPaddingRight(), getPaddingBottom());
-        } else if (lineCount > 999 && lineCount < 10000) {
+        } else if (lastVisibleLine > 999 && lastVisibleLine < 10000) {
             setPadding(73, getPaddingTop(), getPaddingRight(), getPaddingBottom());
-        } else if (lineCount > 9999 && lineCount < 100000) {
+        } else if (lastVisibleLine > 9999 && lastVisibleLine < 100000) {
             setPadding(83, getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
 

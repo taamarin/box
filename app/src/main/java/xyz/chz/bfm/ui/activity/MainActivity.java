@@ -72,39 +72,39 @@ public class MainActivity extends BaseActivity {
         setContentView(binding.getRoot());
         sp = getSharedPreferences("CHZPrefCustom", 0);
         binding.proxy.setOnClickListener(
-                v -> {
-                    setProxyCard("loading");
-                    v.setClickable(false);
-                    if (BaseActivity.isProxying) {
-                        ProxyUtil.stop(isSucceed -> {
-                            runOnUiThread(
-                                    () -> {
-                                        if (isSucceed) {
-                                            setProxyCard("disabled");
-                                            BaseActivity.isProxying = false;
-                                        } else {
-                                            setProxyCard("error");
-                                            BaseActivity.isProxying = true;
-                                        }
-                                        v.setClickable(true);
-                                    });
-                        });
-                    } else {
-                        ProxyUtil.start(isSucceed -> {
-                            runOnUiThread(
-                                    () -> {
-                                        if (isSucceed) {
-                                            setProxyCard("enabled");
-                                            BaseActivity.isProxying = true;
-                                        } else {
-                                            setProxyCard("error");
-                                            BaseActivity.isProxying = false;
-                                        }
-                                        v.setClickable(true);
-                                    });
-                        });
-                    }
-                });
+            v -> {
+                setProxyCard("loading");
+                v.setClickable(false);
+                if (BaseActivity.isProxying) {
+                    ProxyUtil.stop(isSucceed -> {
+                        runOnUiThread(
+                            () -> {
+                                if (isSucceed) {
+                                    setProxyCard("disabled");
+                                    BaseActivity.isProxying = false;
+                                } else {
+                                    setProxyCard("error");
+                                    BaseActivity.isProxying = true;
+                                }
+                                v.setClickable(true);
+                            });
+                    });
+                } else {
+                    ProxyUtil.start(isSucceed -> {
+                        runOnUiThread(
+                            () -> {
+                                if (isSucceed) {
+                                    setProxyCard("enabled");
+                                    BaseActivity.isProxying = true;
+                                } else {
+                                    setProxyCard("error");
+                                    BaseActivity.isProxying = false;
+                                }
+                                v.setClickable(true);
+                            });
+                    });
+                }
+            });
         binding.settings.setOnClickListener(
                 v -> {
                     settingCall();
@@ -112,43 +112,43 @@ public class MainActivity extends BaseActivity {
         binding.apps.setOnClickListener(new StartActivityListener(AppListActivity.class));
         binding.dashboard.setOnClickListener(new StartActivityListener(DashboardActivity.class));
         t =
-                new Thread() {
-                    
-                    @Override
-                    public void run() {
-                        try {
-                            while (!isInterrupted()) {
-                                Thread.sleep(1500);
-                                runOnUiThread(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                bb = ProxyUtil.isReadLog();
-                                                binding.logStatus.setText(
-                                                        Html.fromHtml(
-                                                                bb.replaceAll(
-                                                                                "\\[Info\\]",
-                                                                                "<font color=\"#58869e\">[Info] </font>")
-                                                                        .replaceAll(
-                                                                                "\\[Debug\\]",
-                                                                                "<font color=\"#156238\">[Debug] </font>")
-                                                                        .replaceAll(
-                                                                                "\\[Error\\]",
-                                                                                "<font color=\"#8e2e41\">[Error] </font>")
-                                                                        .replaceAll(
-                                                                                "\\[Warning\\]",
-                                                                                "<font color=\"#fe9a01\">[Warning] </font>")
-                                                                        .replaceAll("\n", "<br>")));
-                                                if (sp.getBoolean("cbScroLog", false)) {
-                                                    binding.svLOG.fullScroll(View.FOCUS_DOWN);
-                                                }
-                                            }
-                                        });
-                            }
-                        } catch (InterruptedException e) {
+            new Thread() {
+                
+                @Override
+                public void run() {
+                    try {
+                        while (!isInterrupted()) {
+                            Thread.sleep(1500);
+                            runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        bb = ProxyUtil.isReadLog();
+                                        binding.logStatus.setText(
+                                            Html.fromHtml(
+                                                bb.replaceAll(
+                                                        "\\[Info\\]",
+                                                        "<font color=\"#58869e\">[Info] </font>")
+                                                    .replaceAll(
+                                                        "\\[Debug\\]",
+                                                        "<font color=\"#156238\">[Debug] </font>")
+                                                    .replaceAll(
+                                                        "\\[Error\\]",
+                                                        "<font color=\"#8e2e41\">[Error] </font>")
+                                                    .replaceAll(
+                                                        "\\[Warning\\]",
+                                                        "<font color=\"#fe9a01\">[Warning] </font>")
+                                                    .replaceAll("\n", "<br>")));
+                                        if (sp.getBoolean("cbScroLog", false)) {
+                                            binding.svLOG.fullScroll(View.FOCUS_DOWN);
+                                        }
+                                    }
+                                });
                         }
+                    } catch (InterruptedException e) {
                     }
-                };
+                }
+            };
         if (sp.getBoolean("cbLog", false)) {
             t.start();
         }
@@ -161,21 +161,21 @@ public class MainActivity extends BaseActivity {
         } else if (BaseActivity.isProxying) {
             setProxyCard("enabled");
             binding.appsSummary.setText(
-                    String.format(
-                            getString(R.string.app_count_in_list),
-                            UIDS.size(),
-                            whiteListMode
-                            ? getString(R.string.whitelist)
-                            : getString(R.string.blacklist)));
+                String.format(
+                    getString(R.string.app_count_in_list),
+                    UIDS.size(),
+                    whiteListMode
+                    ? getString(R.string.whitelist)
+                    : getString(R.string.blacklist)));
         } else {
             setProxyCard("disabled");
             binding.appsSummary.setText(
-                    String.format(
-                            getString(R.string.app_count_in_list),
-                            UIDS.size(),
-                            whiteListMode
-                            ? getString(R.string.whitelist)
-                            : getString(R.string.blacklist)));
+                String.format(
+                    getString(R.string.app_count_in_list),
+                    UIDS.size(),
+                    whiteListMode
+                    ? getString(R.string.whitelist)
+                    : getString(R.string.blacklist)));
         }
         if (sp.getBoolean("cbLog", false)) {
             binding.lllog.setVisibility(View.VISIBLE);
@@ -233,6 +233,7 @@ public class MainActivity extends BaseActivity {
     private void settingCall() {
         final String[] strArr = {"clash", "sing-box", "xray", "v2fly"};
         final String[] strArrProc = {"off", "strict", "always"};
+        final String[] strClashType = {"premium", "meta"};
         final String[] strNetworkMode = {"tproxy", "redirect", "mixed"};
         final String[] strProxyMode = {"tun", "whitelist", "blacklist"};
         final String[] strCronJob = {"@daily", "@weekly", "@monthly"};
@@ -245,24 +246,24 @@ public class MainActivity extends BaseActivity {
         btncnf.setOnClickListener(new StartActivityListener(ConfigActivity.class));
         Button btnModule = inflate.findViewById(R.id.checkModule);
         btnModule.setOnClickListener(
-                v -> {
-                    if (CheckUpdate.check()) {
-                        new AlertDialog.Builder(this)
-                                .setTitle(getString(R.string.update))
-                                .setMessage(
-                                        String.format(
-                                                getString(R.string.updatesum),
-                                                CheckUpdate.getVer()))
-                                .setPositiveButton(
-                                        android.R.string.ok,
-                                        (dialog, which) -> {
-                                            TermUtil.getUpdate();
-                                        })
-                                .show();
-                    } else {
-                        Toast.makeText(this, "no update found!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            v -> {
+                if (CheckUpdate.check()) {
+                    new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.update))
+                        .setMessage(
+                            String.format(
+                                getString(R.string.updatesum),
+                                CheckUpdate.getVer()))
+                        .setPositiveButton(
+                            android.R.string.ok,
+                            (dialog, which) -> {
+                                TermUtil.getUpdate();
+                            })
+                        .show();
+                } else {
+                    Toast.makeText(this, "no update found!", Toast.LENGTH_SHORT).show();
+                }
+            });
         
         Spinner spin = inflate.findViewById(R.id.coreSelector);
         
@@ -272,6 +273,7 @@ public class MainActivity extends BaseActivity {
         LinearLayout llc4 = inflate.findViewById(R.id.clash5);
         LinearLayout llc5 = inflate.findViewById(R.id.clash6);
         LinearLayout llc6 = inflate.findViewById(R.id.clash7);
+        LinearLayout llc7 = inflate.findViewById(R.id.clash8);
         
         //   UI
         CheckBox cbLog = inflate.findViewById(R.id.showLog);
@@ -282,23 +284,6 @@ public class MainActivity extends BaseActivity {
             binding.lllog.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         });
 
-        // CheckBox cbLog = inflate.findViewById(R.id.showLog);
-        // cbLog.setChecked(sp.getBoolean("cbLog", false));
-        
-        // cbLog.setOnCheckedChangeListener(
-                // new CompoundButton.OnCheckedChangeListener() {
-                    // @Override
-                    // public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        // if (z) {
-                            // sp.edit().putBoolean("cbLog", true).apply();
-                            // binding.lllog.setVisibility(View.VISIBLE);
-                        // } else {
-                            // sp.edit().putBoolean("cbLog", false).apply();
-                            // binding.lllog.setVisibility(View.GONE);
-                        // }
-                    // }
-                // });
-        
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, 17367048, strArr);
         arrayAdapter.setDropDownViewResource(17367049);
         spin.setEnabled(!BaseActivity.isProxying);
@@ -313,55 +298,59 @@ public class MainActivity extends BaseActivity {
             spin.setSelection(3);
         }
         spin.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            ProxyUtil.setCore("\"clash\"");
-                            clashSetTV.setVisibility(View.VISIBLE);
-                            llc1.setVisibility(View.VISIBLE);
-                            llc4.setVisibility(View.VISIBLE);
-                            llc5.setVisibility(View.VISIBLE);
-                            llc6.setVisibility(View.VISIBLE);
-                            binding.dashboard.setVisibility(View.VISIBLE);
-                        } else if (i == 1) {
-                            ProxyUtil.setCore("\"sing-box\"");
-                            clashSetTV.setVisibility(View.GONE);
-                            llc1.setVisibility(View.GONE);
-                            llc4.setVisibility(View.GONE);
-                            llc5.setVisibility(View.GONE);
-                            llc6.setVisibility(View.GONE);
-                            binding.dashboard.setVisibility(View.VISIBLE);
-                        } else if (i == 2) {
-                            ProxyUtil.setCore("\"xray\"");
-                            clashSetTV.setVisibility(View.GONE);
-                            llc1.setVisibility(View.GONE);
-                            llc4.setVisibility(View.GONE);
-                            llc5.setVisibility(View.GONE);
-                            llc6.setVisibility(View.GONE);
-                            binding.dashboard.setVisibility(View.GONE);
-                        } else {
-                            ProxyUtil.setCore("\"v2fly\"");
-                            clashSetTV.setVisibility(View.GONE);
-                            llc1.setVisibility(View.GONE);
-                            llc4.setVisibility(View.GONE);
-                            llc5.setVisibility(View.GONE);
-                            llc6.setVisibility(View.GONE);
-                            binding.dashboard.setVisibility(View.GONE);
-                        }
-                        builder.setView(inflate);
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> adapterView, View view, int i, long j) {
+                    if (i == 0) {
+                        ProxyUtil.setCore("\"clash\"");
+                        clashSetTV.setVisibility(View.VISIBLE);
+                        llc1.setVisibility(View.VISIBLE);
+                        llc4.setVisibility(View.VISIBLE);
+                        llc5.setVisibility(View.VISIBLE);
+                        llc6.setVisibility(View.VISIBLE);
+                        llc7.setVisibility(View.VISIBLE);
+                        binding.dashboard.setVisibility(View.VISIBLE);
+                    } else if (i == 1) {
+                        ProxyUtil.setCore("\"sing-box\"");
+                        clashSetTV.setVisibility(View.GONE);
+                        llc1.setVisibility(View.GONE);
+                        llc4.setVisibility(View.GONE);
+                        llc5.setVisibility(View.GONE);
+                        llc6.setVisibility(View.GONE);
+                        llc7.setVisibility(View.GONE);
+                        binding.dashboard.setVisibility(View.VISIBLE);
+                    } else if (i == 2) {
+                        ProxyUtil.setCore("\"xray\"");
+                        clashSetTV.setVisibility(View.GONE);
+                        llc1.setVisibility(View.GONE);
+                        llc4.setVisibility(View.GONE);
+                        llc5.setVisibility(View.GONE);
+                        llc6.setVisibility(View.GONE);
+                        llc7.setVisibility(View.GONE);
+                        binding.dashboard.setVisibility(View.GONE);
+                    } else {
+                        ProxyUtil.setCore("\"v2fly\"");
+                        clashSetTV.setVisibility(View.GONE);
+                        llc1.setVisibility(View.GONE);
+                        llc4.setVisibility(View.GONE);
+                        llc5.setVisibility(View.GONE);
+                        llc6.setVisibility(View.GONE);
+                        llc7.setVisibility(View.GONE);
+                        binding.dashboard.setVisibility(View.GONE);
                     }
-                    
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+                    builder.setView(inflate);
+                }
+                
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
         
         Spinner spNM = inflate.findViewById(R.id.spNetworkMode);
         ArrayAdapter nmAdapter = new ArrayAdapter(this, 17367048, strNetworkMode);
         nmAdapter.setDropDownViewResource(17367049);
-        //   spin.setEnabled(!BaseActivity.isProxying);
+        spNM.setEnabled(!BaseActivity.isProxying);
         spNM.setAdapter((SpinnerAdapter) nmAdapter);
         
         if (TermUtil.getNetworkMode().contains("tpro")) {
@@ -373,28 +362,29 @@ public class MainActivity extends BaseActivity {
         }
         
         spNM.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            TermUtil.setNetworkMode("tproxy");
-                        } else if (i == 1) {
-                            TermUtil.setNetworkMode("redirect");
-                        } else {
-                            TermUtil.setNetworkMode("mixed");
-                        }
-                        builder.setView(inflate);
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> adapterView, View view, int i, long j) {
+                    if (i == 0) {
+                        TermUtil.setNetworkMode("tproxy");
+                    } else if (i == 1) {
+                        TermUtil.setNetworkMode("redirect");
+                    } else {
+                        TermUtil.setNetworkMode("mixed");
                     }
-                    
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+                    builder.setView(inflate);
+                }
+                
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
 
         Spinner spProxyMode = inflate.findViewById(R.id.spProxyMode);
         ArrayAdapter ProxyModeAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, strProxyMode);
         ProxyModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spProxyMode.setEnabled(!BaseActivity.isProxying);
         spProxyMode.setAdapter((SpinnerAdapter) ProxyModeAdapter);
         
         if (TermUtil.getProxyMode().contains("tun")) {
@@ -406,24 +396,24 @@ public class MainActivity extends BaseActivity {
         }
         
         spProxyMode.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            TermUtil.setProxyMode("tun");
-                        } else if (i == 1) {
-                            TermUtil.setProxyMode("whitelist");
-                        } else {
-                            TermUtil.setProxyMode("blacklist");
-                        }
-                        builder.setView(inflate);
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> adapterView, View view, int i, long j) {
+                    if (i == 0) {
+                        TermUtil.setProxyMode("tun");
+                    } else if (i == 1) {
+                        TermUtil.setProxyMode("whitelist");
+                    } else {
+                        TermUtil.setProxyMode("blacklist");
                     }
-        
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+                    builder.setView(inflate);
+                }
+    
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
 
         Spinner spCronJob = inflate.findViewById(R.id.spCronJob);
         ArrayAdapter CronJobAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, strCronJob);
@@ -439,130 +429,154 @@ public class MainActivity extends BaseActivity {
         }
         
         spCronJob.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            TermUtil.setCronJob("@daily");
-                        } else if (i == 1) {
-                            TermUtil.setCronJob("@weekly");
-                        } else {
-                            TermUtil.setCronJob("@monthly");
-                        }
-                        builder.setView(inflate);
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> adapterView, View view, int i, long j) {
+                    if (i == 0) {
+                        TermUtil.setCronJob("@daily");
+                    } else if (i == 1) {
+                        TermUtil.setCronJob("@weekly");
+                    } else {
+                        TermUtil.setCronJob("@monthly");
                     }
+                    builder.setView(inflate);
+                }
+    
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
+
+        Spinner clashTypeSpinner = inflate.findViewById(R.id.spClashType);
+        ArrayAdapter<String> clashTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, strClashType);
+        clashTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clashTypeSpinner.setAdapter(clashTypeAdapter);
+        clashTypeSpinner.setEnabled(!BaseActivity.isProxying);
+  
+        String currentClashType = TermUtil.getClashType();
+        int selectionIndex = currentClashType.contains("premium") ? 0 : 1;
+        clashTypeSpinner.setSelection(selectionIndex);
         
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
+        clashTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long j) {
+                String selectedClashType = (i == 0) ? "premium" : "meta";
+                TermUtil.setClashType(selectedClashType);
+                builder.setView(inflate);
+            }
+        
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
 
         //   CLASH CHECKBOX
         CheckBox cbFakeIp = inflate.findViewById(R.id.fake_ip);
         cbFakeIp.setChecked(TermUtil.getFakeIp());
         
         cbFakeIp.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setFakeIp("fake-ip");
-                        } else {
-                            TermUtil.setFakeIp("redir-host");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setFakeIp("fake-ip");
+                    } else {
+                        TermUtil.setFakeIp("redir-host");
                     }
-                });
+                }
+            });
 
         CheckBox cbUnified = inflate.findViewById(R.id.unified_delay);
         cbUnified.setChecked(TermUtil.getUnified());
         
         cbUnified.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setUnified("true");
-                        } else {
-                            TermUtil.setUnified("false");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setUnified("true");
+                    } else {
+                        TermUtil.setUnified("false");
                     }
-                });
+                }
+            });
         
         CheckBox cbGeodata = inflate.findViewById(R.id.geodata_mod);
         cbGeodata.setChecked(TermUtil.getGeodata());
         
         cbGeodata.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setGeodata("true");
-                        } else {
-                            TermUtil.setGeodata("false");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setGeodata("true");
+                    } else {
+                        TermUtil.setGeodata("false");
                     }
-                });
+                }
+            });
         
         CheckBox cbSniffer = inflate.findViewById(R.id.snifferrs);
         cbSniffer.setChecked(TermUtil.getSniffer());
         
         cbSniffer.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setSniffer("true");
-                        } else {
-                            TermUtil.setSniffer("false");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setSniffer("true");
+                    } else {
+                        TermUtil.setSniffer("false");
                     }
-                });
+                }
+            });
         
         CheckBox cbPort = inflate.findViewById(R.id.port_detect);
         cbPort.setChecked(TermUtil.getPortDetect());
         
         cbPort.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setPortDetect("true");
-                        } else {
-                            TermUtil.setPortDetect("false");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setPortDetect("true");
+                    } else {
+                        TermUtil.setPortDetect("false");
                     }
-                });
+                }
+            });
 
         CheckBox cbQuic = inflate.findViewById(R.id.quic);
         cbQuic.setChecked(TermUtil.getQuic());
         
         cbQuic.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setQuic("enable");
-                        } else {
-                            TermUtil.setQuic("disable");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setQuic("enable");
+                    } else {
+                        TermUtil.setQuic("disable");
                     }
-                });
+                }
+            });
 
         CheckBox cbIpv6 = inflate.findViewById(R.id.ipv6);
         cbIpv6.setChecked(TermUtil.getIpv6());
         
         cbIpv6.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
-                        if (z) {
-                            TermUtil.setIpv6("true");
-                        } else {
-                            TermUtil.setIpv6("false");
-                        }
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean z) {
+                    if (z) {
+                        TermUtil.setIpv6("true");
+                    } else {
+                        TermUtil.setIpv6("false");
                     }
-                });
+                }
+            });
 
         CheckBox cbCron = inflate.findViewById(R.id.cron);
         cbCron.setChecked(Boolean.parseBoolean(TermUtil.getCron()));
@@ -637,41 +651,44 @@ public class MainActivity extends BaseActivity {
             arSpin.setSelection(2);
         }
         arSpin.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(
-                            AdapterView<?> adapterView, View view, int i, long j) {
-                        if (i == 0) {
-                            TermUtil.setFindProc("off");
-                        } else if (i == 1) {
-                            TermUtil.setFindProc("strict");
-                        } else {
-                            TermUtil.setFindProc("always");
-                        }
-                        builder.setView(inflate);
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> adapterView, View view, int i, long j) {
+                    if (i == 0) {
+                        TermUtil.setFindProc("off");
+                    } else if (i == 1) {
+                        TermUtil.setFindProc("strict");
+                    } else {
+                        TermUtil.setFindProc("always");
                     }
-                    
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
-        
+                    builder.setView(inflate);
+                }
+                
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
+
+        builder.setView(inflate);
+
+
         Button btnIp = inflate.findViewById(R.id.checkIp);
         btnIp.setOnClickListener(
-                v -> {
-                    dialogIP();
-                });
+            v -> {
+                dialogIP();
+            });
 
         Button btnAbt = inflate.findViewById(R.id.aboutApp);
         btnAbt.setOnClickListener(
-                v -> {
-                    dialogAbout();
-                });
+            v -> {
+                dialogAbout();
+            });
         
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
-                .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
+            .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
     
     private class StartActivityListener implements View.OnClickListener {
@@ -693,20 +710,20 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         binding.appsSummary.setText(
-                String.format(
-                        getString(R.string.app_count_in_list),
-                        UIDS.size(),
-                        whiteListMode
-                        ? getString(R.string.whitelist)
-                        : getString(R.string.blacklist)));
+            String.format(
+                getString(R.string.app_count_in_list),
+                UIDS.size(),
+                whiteListMode
+                ? getString(R.string.whitelist)
+                : getString(R.string.blacklist)));
 
-        /*   if (CheckUpdate.check()) {
-            binding.updaterSummary.setText(
-                    String.format(getString(R.string.updatesum), CheckUpdate.getVer()));
-            binding.updater.setVisibility(View.VISIBLE);
-        } else {
-            binding.updater.setVisibility(View.GONE);
-        }*/
+    /*   if (CheckUpdate.check()) {
+        binding.updaterSummary.setText(
+            String.format(getString(R.string.updatesum), CheckUpdate.getVer()));
+        binding.updater.setVisibility(View.VISIBLE);
+    } else {
+        binding.updater.setVisibility(View.GONE);
+    }*/
     }
     
     @Override
@@ -731,7 +748,7 @@ public class MainActivity extends BaseActivity {
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
-                .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
+            .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
 
     private void dialogAbout() {
@@ -741,12 +758,12 @@ public class MainActivity extends BaseActivity {
         
         TextView tv = inflate.findViewById(R.id.tvAbout);
         tv.setText(
-                "App: t.me/chetoosz\nModule: t.me/taamarin");
+            "App: t.me/chetoosz\nModule: t.me/taamarin");
         
         final AlertDialog create = builder.create();
         create.show();
         create.getWindow()
-                .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
+            .setLayout((int) (getResources().getDisplayMetrics().widthPixels * 0.8d), -2);
     }
     
     private void fcSpin(String[] arr, Spinner spin) {

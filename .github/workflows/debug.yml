@@ -1,39 +1,43 @@
-name: build apk
+name: Build APKs
 
 on:
   push:
     branches:
       - master
+      - dev
+    paths-ignore:
+      - "docs/**"
+      - "README.md"
   pull_request_target:
     branches:
       - master
+      - dev
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout code
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: setup JDK 17 with distribution
+    - name: Setup JDK 17 with distribution
       uses: actions/setup-java@v2
       with:
         java-version: 17
         distribution: zulu
 
-    - name: build
+    - name: Build
       uses: gradle/gradle-build-action@v2
       with:
         arguments: --no-daemon app:assembleRelease
 
-    - name: display files in directory
+    - name: Display files in directory
       run: |
         ls app/build/outputs/apk/release
-    
+
     - uses: r0adkll/sign-android-release@v1
       name: Sign app APK
-      # ID used to access action output
       id: sign_apks
       with:
         releaseDirectory: app/build/outputs/apk/release
@@ -42,42 +46,45 @@ jobs:
         signingKeyBase64: ${{ secrets.KEYSTORE_CONTENT }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
 
-    # Example use of `signedReleaseFile` output -- not needed
     - uses: actions/upload-artifact@v2
       with:
-        name: signed app bundle
-        path: ${{steps.sign_apks.outputs.signedReleaseFile}}
+        name: Signed app bundle
+        path: ${{ steps.sign_apks.outputs.signedReleaseFile }}
 
-    - name: delete current Prerelease-alpha assets
+    - name: Delete current Prerelease-alpha assets
+      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
       uses: andreaswilli/delete-release-assets-action@v2.0.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         tag: Prerelease-alpha
         deleteOnlyFromDrafts: false
 
-    - name: tag Repo
+    - name: Tag Repo
+      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
       uses: richardsimko/update-tag@v1
       with:
         tag_name: Prerelease-alpha
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: upload Prerelease-alpha
+    - name: Upload Prerelease-alpha
+      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
       uses: softprops/action-gh-release@v1
-      if: ${{  success() }}
       with:
         tag: ${{ github.ref_name }}
         tag_name: Prerelease-alpha
-        files: app/build/outputs/apk/release/*
+        files: app/build/outputs/apk/release/app-release-unsigned-signed.apk
         prerelease: true
         generate_release_notes: true
 
-    - name: find APKs
+    - name: Find APKs
+      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
       run: |
         mkdir APKs
         mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-$(git rev-parse --short HEAD)-signed.apk
 
-    - name: upload to telegram
+    - name: Upload to Telegram
+      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
       env:
         CHAT_ID: ${{ secrets.CHAT_ID }}
         CACHE_CHAT_ID: ${{ secrets.CACHE_CHAT_ID }}
@@ -86,9 +93,9 @@ jobs:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         COMMIT_URL: ${{ github.event.head_commit.url }}
         RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        TITLE: BFR Manager
+        TITLE: Box4Root Manager
       run: |
         export VERSION=$(git rev-parse --short HEAD)
         FILE=$(find ./APKs/* -type f)
         pip3 install python-telegram-bot
-        python3 docs/tubot.py $FILE
+        python3 scripst/tubot.py $FILE

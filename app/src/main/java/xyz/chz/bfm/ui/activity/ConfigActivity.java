@@ -140,17 +140,17 @@ public class ConfigActivity extends BaseActivity {
             JSONObject jsonObject = new JSONObject(map);
 
             ret =
-                    convertToYaml(jsonObject.toString())
-                            .replaceAll("null", "")
-                            .replaceAll("---", "")
-                            .replaceAll("\"\"", "");
+                convertToYaml(jsonObject.toString())
+                    .replaceAll("null", "")
+                    .replaceAll("---", "")
+                    .replaceAll("\"\"", "");
             return ret;
         } catch (Exception e) {
-            //   return e.getMessage();
+               // return e.getMessage();
             new AlertDialog.Builder(this)
-                    .setMessage(e.getMessage().toString())
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
-                    .show();
+                .setMessage(e.getMessage().toString())
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
+                .show();
         }
         return "";
     }
@@ -181,9 +181,9 @@ public class ConfigActivity extends BaseActivity {
             YAMLMapper ym = new YAMLMapper();
             JsonNode jn = om.readTree(in);
             String output =
-                    ym.writer()
-                            .without(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
-                            .writeValueAsString(jn);
+                ym.writer()
+                    .without(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
+                    .writeValueAsString(jn);
             return output;
         } catch (Exception e) {
             return e.getMessage().toString();
@@ -199,9 +199,9 @@ public class ConfigActivity extends BaseActivity {
                 new JSONArray(test);
             } catch (JSONException ex1) {
                 new AlertDialog.Builder(this)
-                        .setMessage("" + ex1.getMessage())
-                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
-                        .show();
+                    .setMessage("" + ex1.getMessage())
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {})
+                    .show();
                 return false;
             }
         }
