@@ -21,6 +21,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Get tags
+      id: get_head
+      run: |
+        echo "head=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
     - name: Setup JDK 17 with distribution
       uses: actions/setup-java@v2
       with:
@@ -46,10 +51,15 @@ jobs:
         signingKeyBase64: ${{ secrets.KEYSTORE_CONTENT }}
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
 
+    - name: Rename Apks
+      run: |
+        mkdir -p APKs
+        mv ${{ steps.sign_apks.outputs.signedReleaseFile }} APKs/box-manager-${{ steps.get_head.outputs.head }}-prerelease.apk
+
     - uses: actions/upload-artifact@v2
       with:
-        name: Signed app bundle
-        path: ${{ steps.sign_apks.outputs.signedReleaseFile }}
+        name: signed_apps
+        path: APKs
 
     - name: Delete current Prerelease-alpha assets
       if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
@@ -73,15 +83,9 @@ jobs:
       with:
         tag: ${{ github.ref_name }}
         tag_name: Prerelease-alpha
-        files: app/build/outputs/apk/release/app-release-unsigned-signed.apk
+        files: APKs/*
         prerelease: true
         generate_release_notes: true
-
-    - name: Find APKs
-      if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
-      run: |
-        mkdir APKs
-        mv app/build/outputs/apk/release/app-release-unsigned-signed.apk APKs/box-manager-$(git rev-parse --short HEAD)-signed.apk
 
     - name: Upload to Telegram
       if: ${{ github.ref_name == 'master' && github.event_name != 'pull_request' }}
