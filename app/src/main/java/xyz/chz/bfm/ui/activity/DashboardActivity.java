@@ -9,14 +9,14 @@ import xyz.chz.bfm.ui.activity.base.BaseActivity;
 import xyz.chz.bfm.util.module.TermUtil;
 
 public class DashboardActivity extends BaseActivity {
-    
+
     ActivityDashboardBinding binding;
-    
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
+
         String linkController = TermUtil.getLinkController();
         if (linkController.startsWith(":")) {
             linkController = "0.0.0.0" + linkController;

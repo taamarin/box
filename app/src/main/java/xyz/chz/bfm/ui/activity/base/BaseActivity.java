@@ -30,34 +30,34 @@ public class BaseActivity extends MaterialActivity {
         if ("".equals(MODULE_VERSION_CODE)) {
             // module install check
             new AlertDialog.Builder(this)
-                    .setMessage(R.string.need_install_module)
-                    .setPositiveButton(
-                            android.R.string.ok,
-                            (dialog, id) -> {
-                                NavUtil.startURL(this, getString(R.string.module_repo_url));
-                                finish();
-                            })
-                    .setCancelable(false)
-                    .show();
+                .setMessage(R.string.need_install_module)
+                .setPositiveButton(
+                    android.R.string.ok,
+                    (dialog, id) -> {
+                        NavUtil.startURL(this, getString(R.string.module_repo_url));
+                        finish();
+                    })
+                .setCancelable(false)
+                .show();
         } else {
             if (Integer.parseInt(MODULE_VERSION_CODE)
                     < Integer.parseInt(getString(R.string.min_module_version))) {
                 // module version check
                 new AlertDialog.Builder(this)
-                        .setMessage(
-                                String.format(
-                                        getString(R.string.need_update_module),
-                                        getString(R.string.min_module_version)))
-                        .setPositiveButton(
-                                android.R.string.ok,
-                                (dialog, id) -> {
-                                    NavUtil.startURL(this, getString(R.string.module_repo_url));
-                                    finish();
-                                })
-                        .setCancelable(false)
-                        .show();
+                    .setMessage(
+                        String.format(
+                            getString(R.string.need_update_module),
+                            getString(R.string.min_module_version)))
+                    .setPositiveButton(
+                        android.R.string.ok,
+                        (dialog, id) -> {
+                            NavUtil.startURL(this, getString(R.string.module_repo_url));
+                            finish();
+                        })
+                    .setCancelable(false)
+                    .show();
             }
-        } // */
+        }
     }
 
     @Override
@@ -78,27 +78,27 @@ public class BaseActivity extends MaterialActivity {
         window.setStatusBarColor(Color.TRANSPARENT);
 
         window.getDecorView()
-                .post(
-                        () -> {
-                            if (window.getDecorView()
-                                            .getRootWindowInsets()
-                                            .getSystemWindowInsetBottom()
-                                    >= Resources.getSystem().getDisplayMetrics().density * 40) {
-                                window.setNavigationBarColor(
-                                        ResourcesKt.resolveColor(
-                                                                getTheme(),
-                                                                android.R.attr.navigationBarColor)
-                                                        & 0x00ffffff
-                                                | -0x20000000);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                    window.setNavigationBarContrastEnforced(false);
-                                }
-                            } else {
-                                window.setNavigationBarColor(Color.TRANSPARENT);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                    window.setNavigationBarContrastEnforced(true);
-                                }
-                            }
-                        });
+            .post(
+                () -> {
+                    if (window.getDecorView()
+                                    .getRootWindowInsets()
+                                    .getSystemWindowInsetBottom()
+                            >= Resources.getSystem().getDisplayMetrics().density * 40) {
+                        window.setNavigationBarColor(
+                                ResourcesKt.resolveColor(
+                                                        getTheme(),
+                                                        android.R.attr.navigationBarColor)
+                                                & 0x00ffffff
+                                        | -0x20000000);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            window.setNavigationBarContrastEnforced(false);
+                        }
+                    } else {
+                        window.setNavigationBarColor(Color.TRANSPARENT);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            window.setNavigationBarContrastEnforced(true);
+                        }
+                    }
+                });
     }
 }

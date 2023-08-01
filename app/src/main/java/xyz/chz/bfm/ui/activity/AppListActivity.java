@@ -47,19 +47,19 @@ public class AppListActivity extends BaseActivity {
         binding.swipeRefreshLayout.setOnRefreshListener(() -> appListAdapter.refresh());
 
         searchListener =
-                new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        appListAdapter.getFilter().filter(query);
-                        return false;
-                    }
+            new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    appListAdapter.getFilter().filter(query);
+                    return false;
+                }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        appListAdapter.getFilter().filter(newText);
-                        return false;
-                    }
-                };
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    appListAdapter.getFilter().filter(newText);
+                    return false;
+                }
+            };
     }
 
     @Override
@@ -80,12 +80,12 @@ public class AppListActivity extends BaseActivity {
 
     public void onDataReady() {
         runOnUiThread(
-                () -> {
-                    binding.progress.setIndeterminate(false);
-                    binding.swipeRefreshLayout.setRefreshing(false);
-                    String queryStr = searchView != null ? searchView.getQuery().toString() : "";
-                    appListAdapter.getFilter().filter(queryStr);
-                });
+            () -> {
+                binding.progress.setIndeterminate(false);
+                binding.swipeRefreshLayout.setRefreshing(false);
+                String queryStr = searchView != null ? searchView.getQuery().toString() : "";
+                appListAdapter.getFilter().filter(queryStr);
+            });
     }
 
     @Override

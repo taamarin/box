@@ -158,4 +158,12 @@ public class TermUtil {
     public static String setFindProc(String mode) {
         return MagiskHelper.execRootCmd("sed -i 's/find-process-mode:.*/find-process-mode: " + mode + "/;' /data/adb/box/clash/config.yaml");
     }
+
+    public static String getClashType() {
+        return MagiskHelper.execRootCmd("grep 'clash_option=' /data/adb/box/settings.ini | sed 's/^.*=//' | sed 's/\"//g'");
+    }
+
+    public static String setClashType(String mode) {
+        return MagiskHelper.execRootCmd("sed -i 's/clash_option=.*/clash_option=\"" + mode + "\"/;' /data/adb/box/settings.ini");
+    }
 }

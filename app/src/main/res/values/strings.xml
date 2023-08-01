@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Box for Root</string>
-    <string name="app_version">2.0.7-debug</string>
+    <string name="app_version">2.0.8-beta.1</string>
     <!-- BaseActivity -->
-    <string name="min_module_version">20230725</string>
-    <string name="need_install_module">please install the Box for Root module first!</string>
+    <string name="min_module_version">20230801</string>
+    <string name="need_install_module">please install the Box for Root module first and give root permission!</string>
     <string name="need_update_module">please update your Box for Root module to at least %s !</string>
     <string name="module_repo_url">https://github.com/taamarin/box_for_magisk</string>
     <string name="release_repo_url">https://github.com/taamarin/box_for_magisk/releases</string>
@@ -28,10 +28,10 @@
     <string name="only_work">notes: for CLASH only works on redir-host</string>
 
     <!-- Main Activity -->
-    <string name="enabled">enabled</string>
-    <string name="disabled">disabled</string>
-    <string name="loading">loading</string>
-    <string name="error">error</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
     <string name="install_required">module install is required</string>
     <string name="Apps">apps</string>
     <string name="sett">settings</string>
