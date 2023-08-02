@@ -78,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_marginLeft="9dp"
                 android:layout_weight="1.6"
-                android:text="find-procces" />
+                android:text="find procces" />
 
             <TextView
                 android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 android:layout_width="0dp"
                 android:layout_marginLeft="9dp"
                 android:layout_weight="1.6"
-                android:text="xclash" />
+                android:text="clash options" />
 
             <TextView
                 android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/unified_delay"
-                android:text="fake-tcp [meta]" />
+                android:text="unified delay[meta]" />
 
             <CheckBox
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/snifferrs"
-                android:text="sniffer [meta]" />
+                android:text="sniffer[meta]" />
 
         </LinearLayout>
 
@@ -178,7 +178,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/geodata_mod"
-                android:text="geodata [meta] " />
+                android:text="geodata[meta] " />
 
         </LinearLayout>
 
@@ -229,7 +229,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/quic"
-                android:text="Quic" />
+                android:text="quic" />
 
         </LinearLayout>
 
@@ -246,7 +246,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/ipv6"
-                android:text="IPv6" />
+                android:text="ipv6" />
 
             <CheckBox
                 android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/port_detect"
-                android:text="port-detect" />
+                android:text="port detect" />
 
         </LinearLayout>
 
@@ -279,7 +279,7 @@
                 android:textSize="12sp"
                 android:layout_weight="1"
                 android:id="@+id/geo"
-                android:text="Xgeo" />
+                android:text="geox" />
 
         </LinearLayout>
 
