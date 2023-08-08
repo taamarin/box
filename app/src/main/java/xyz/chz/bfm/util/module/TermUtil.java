@@ -46,15 +46,7 @@ public class TermUtil {
     public static String setProxyMode(String mode) {
         return MagiskHelper.execRootCmd("sed -i 's/proxy_mode=.*/proxy_mode=\"" + mode + "\"/;' /data/adb/box/settings.ini");
     }
-    
-    public static String getCronJob() {
-        return MagiskHelper.execRootCmd("grep 'interva_update=' /data/adb/box/settings.ini | sed 's/^.*=//' | sed 's/\"//g'");
-    }
 
-    public static String setCronJob(String mode) {
-        return MagiskHelper.execRootCmd("sed -i 's/interva_update=.*/interva_update=\"" + mode + "\"/;' /data/adb/box/settings.ini");
-    } 
-    
     public static String getCron() {
         return MagiskHelper.execRootCmd("grep 'run_crontab=' /data/adb/box/settings.ini | sed 's/^.*=//' | sed 's/\"//g'");
     }

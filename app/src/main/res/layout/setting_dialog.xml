@@ -359,33 +359,6 @@
                     android:textSize="8sp"
                     android:id="@+id/spProxyMode" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.6"
-                    android:layout_marginLeft="9dp"
-                    android:text="CronJob" />
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:text=":" />
-
-                <Spinner
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.5"
-                    android:textSize="8sp"
-                    android:id="@+id/spCronJob" />
-            </LinearLayout>           
         </LinearLayout>
 
         <LinearLayout
