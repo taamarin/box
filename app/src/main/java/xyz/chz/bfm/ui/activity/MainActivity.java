@@ -236,8 +236,7 @@ public class MainActivity extends BaseActivity {
         final String[] strClashType = {"premium", "meta"};
         final String[] strNetworkMode = {"tproxy", "redirect", "mixed"};
         final String[] strProxyMode = {"tun", "whitelist", "blacklist"};
-        final String[] strCronJob = {"@daily", "@weekly", "@monthly"};
-        
+
         View inflate = LayoutInflater.from(this).inflate(R.layout.setting_dialog, (ViewGroup) null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(inflate);
@@ -406,39 +405,6 @@ public class MainActivity extends BaseActivity {
                         TermUtil.setProxyMode("whitelist");
                     } else {
                         TermUtil.setProxyMode("blacklist");
-                    }
-                    builder.setView(inflate);
-                }
-    
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-                }
-            });
-
-        Spinner spCronJob = inflate.findViewById(R.id.spCronJob);
-        ArrayAdapter CronJobAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, strCronJob);
-        CronJobAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spCronJob.setAdapter((SpinnerAdapter) CronJobAdapter);
-        
-        if (TermUtil.getCronJob().contains("@daily")) {
-            spCronJob.setSelection(0);
-        } else if (TermUtil.getCronJob().contains("@weekly")) {
-            spCronJob.setSelection(1);
-        } else {
-            spCronJob.setSelection(2);
-        }
-        
-        spCronJob.setOnItemSelectedListener(
-            new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(
-                        AdapterView<?> adapterView, View view, int i, long j) {
-                    if (i == 0) {
-                        TermUtil.setCronJob("@daily");
-                    } else if (i == 1) {
-                        TermUtil.setCronJob("@weekly");
-                    } else {
-                        TermUtil.setCronJob("@monthly");
                     }
                     builder.setView(inflate);
                 }

@@ -8,7 +8,7 @@ on:
     paths-ignore:
       - "docs/**"
       - "README.md"
-  pull_request_target:
+  pull_request:
     branches:
       - master
       - dev
@@ -26,16 +26,20 @@ jobs:
       run: |
         echo "head=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
-    - name: Setup JDK 17 with distribution
+    - name: Set up Java
       uses: actions/setup-java@v2
       with:
+        distribution: 'zulu'
         java-version: 17
-        distribution: zulu
-
-    - name: Build
+        
+    - name: Clean Gradle Cache
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: --no-daemon app:assembleRelease
+        gradle-home-cache-cleanup: true
+        
+    - name: Build Release APK
+      run: |
+        ./gradlew --no-daemon --no-configuration-cache -q app:assembleRelease
 
     - name: Display files in directory
       run: |
