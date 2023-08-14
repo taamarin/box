@@ -16,12 +16,10 @@ TITLE = os.environ.get("TITLE")
 VERSION = os.environ.get("VERSION")
 MSG_TEMPLATE = """
 *{title}*
-\#cli\_{version}
 ```
 {commit_message}
 ```
-[Commit]({commit_url})
-[Workflow run]({run_url})
+[commit]({commit_url})
 """.strip()
 
 

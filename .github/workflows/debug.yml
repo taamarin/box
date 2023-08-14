@@ -36,7 +36,7 @@ jobs:
         gradle-home-cache-cleanup: true
 
     - name: Build Release APK
-      run: ./gradlew app:assembleRelease
+      run: ./gradlew --no-daemon app:assembleRelease
 
     - name: Display files in directory
       run: |
@@ -98,9 +98,9 @@ jobs:
         COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         COMMIT_URL: ${{ github.event.head_commit.url }}
         RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        TITLE: Box4Root Manager
+        TITLE: Box Manager
       run: |
         export VERSION=$(git rev-parse --short HEAD)
         FILE=$(find ./APKs/* -type f)
         pip3 install python-telegram-bot
-        python3 scripst/tubot.py $FILE
+        python3 docs/tubot.py $FILE

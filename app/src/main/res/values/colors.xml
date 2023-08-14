@@ -20,7 +20,7 @@
   -->
 
 <resources>
-    <color name="color_primary_light">@color/google_blue_600</color>
-    <color name="color_primary_dark">@color/google_blue_300</color>
+    <color name="color_primary_light">#F35E5E</color>
+    <color name="color_primary_dark">#F35E5E</color>
     <color name="color_primary">@color/color_primary_light</color>
 </resources>
