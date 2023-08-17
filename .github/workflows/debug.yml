@@ -26,17 +26,20 @@ jobs:
       run: |
         echo "head=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
-    - uses: actions/setup-java@v3
+    - name: Set up Java
+      uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
-        java-version: 19
-
-    - uses: gradle/gradle-build-action@v2
+        java-version: 17
+        
+    - name: Clean Gradle Cache
+      uses: gradle/gradle-build-action@v2
       with:
         gradle-home-cache-cleanup: true
-
+        
     - name: Build Release APK
-      run: ./gradlew --no-daemon app:assembleRelease
+      run: |
+        ./gradlew --no-daemon --no-configuration-cache -q app:assembleRelease
 
     - name: Display files in directory
       run: |
